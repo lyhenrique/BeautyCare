@@ -1,0 +1,28 @@
+<resources>
+
+    <string name="app_name">BeautyCare</string>
+    <string name="tab_home">Home</string>
+    <string name="tab_rank">Rank</string>
+    <string name="tab_settings">Setting</string>
+    <string name="tab_collect">Favorite</string>
+    <string name="btn_jump_to_shopping_mall">Detail about the Shopping Mall</string>
+    <string name="btn_jump_to_product">Detail about the Product</string>
+
+
+    <string name="text_info"> What Is Green Makeup？\n
+        Cosmetic items that do not contain synthetics, binders, paraben preservatives, emulsifiers,
+        and fillers are known as Green makeup. They are 100% vegan and made of botanicals and minerals.
+        Some organic brands like Bite Beauty and RMS Beauty are made with food grade quality meaning
+        you can eat them like a food.
+    </string>
+
+    <string name="urlHead">http://175.159.85.35</string>
+
+    <string name="footer_text">The Footer</string>
+
+    <!--footer-->
+    <string name="list_footer_loading">Loading…</string>
+    <string name="list_footer_network_error">Press to load again</string>
+    <string name="list_footer_end">The End</string>
+
+</resources>

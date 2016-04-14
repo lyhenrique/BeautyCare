@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="#f2f2f2">
+
+    <TextView
+        android:id="@+id/rank"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Ranking"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:background="@color/colorAccent"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/gray"
+        android:dividerHeight="2dp"
+        android:id="@+id/listAll"
+        android:layout_weight="1"
+        />
+
+</LinearLayout>
