@@ -12,7 +12,7 @@ import android.view.Window;
 import android.widget.ImageView;
 
 import com.beautycare.R;
-import com.beautycare.discount.DiscountIndex;
+import com.beautycare.discountpage.DiscountIndex;
 import com.beautycare.main.widget.CycleIndicator;
 import com.beautycare.main.widget.ImagePager;
 import com.beautycare.makeup.makeupIndex;
