@@ -70,8 +70,9 @@ public class DiscountDataUtils extends AsyncTask<String, Void, ArrayList<ItemBea
             }
             else {
                 List<AVObject> mFirstPageResult = query_1.find();
-                if(mFirstPageResult.size() != 0) {
-                    mAllCounter = mFirstPageResult.size();
+                mAllCounter = mFirstPageResult.size();
+                if(mAllCounter != 0) {
+
 
                 }
 
