@@ -13,8 +13,7 @@
         <com.daimajia.slider.library.SliderLayout
             android:id="@+id/discount_slider"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_below="@+id/tv_detail_content" />
+            android:layout_height="350dp" />
 
         <com.daimajia.slider.library.Indicators.PagerIndicator
             android:id="@+id/discount_custom_indicator"
@@ -29,7 +28,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:text="Sales"
-            android:textSize="20sp" />
+            android:layout_below="@+id/discount_slider"
+            android:textSize="20sp"
+            android:textColor="#000000"/>
 
         <TextView
             android:id="@+id/tv_detail_content"
@@ -38,13 +39,14 @@
             android:layout_below="@+id/tv_detail_title"
             android:layout_marginTop="7dp"
             android:text="contents"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textColor="#000000"/>
 
         <Button
             android:id="@+id/btn_jump_to_shoppint_mall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/discount_slider"
+            android:layout_below="@+id/tv_detail_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:background="#FF4081"
