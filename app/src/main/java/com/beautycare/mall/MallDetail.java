@@ -78,7 +78,7 @@ public class MallDetail extends AppCompatActivity implements OnMapReadyCallback,
 
 
         receiveBundleData = getIntent().getExtras();
-        mallname = receiveBundleData.getString("name");//其他页面传商场名字参数即可，键名统一为为MallName
+        mallname = receiveBundleData.getString("MallName");//其他页面传商场名字参数即可，键名统一为为MallName
 //        receiveMallData.setMallURL(receiveBundleData.getString("url"));
 //        receiveMallData.setMallContent(receiveBundleData.getString("content"));
 //        receiveMallData.setMallName(receiveBundleData.getString("name"));
