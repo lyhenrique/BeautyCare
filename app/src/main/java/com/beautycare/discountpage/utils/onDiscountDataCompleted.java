@@ -9,5 +9,6 @@ import java.util.ArrayList;
  * Created by Eric.Lau on 16/4/14.
  */
 public interface onDiscountDataCompleted {
-    void onDiscountDataDone(ArrayList<ItemBean> arrayList);
+    void onDiscountDataDone(ArrayList<ItemBean> arrayList,ArrayList<ItemBean> allData, int currentNum);
+    void onSecondDataDone(ArrayList<ItemBean> secondList);
 }

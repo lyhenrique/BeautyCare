@@ -34,6 +34,9 @@ public class SeeBigImg extends AppCompatActivity {
                 .build();
         img = (PhotoView)findViewById(R.id.img);
         img.enable();
+//        Info info = img.getInfo();
+// 从一张图片信息变化到现在的图片，用于图片点击后放大浏览，具体使用可以参照demo的使用
+//        img.animaFrom(info);
         bundle = getIntent().getExtras();
         ImageLoader.getInstance().displayImage(bundle.getString("URL"),img,options);
 

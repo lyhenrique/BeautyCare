@@ -16,11 +16,17 @@ import java.util.List;
  * Created by Eric.Lau on 16/4/14.
  */
 public class DiscountDataUtils extends AsyncTask<String, Void, ArrayList<ItemBean>> {
-    ArrayList<ItemBean> tmplist = new ArrayList<>();
+    ArrayList<ItemBean> tmplist = new ArrayList<ItemBean>();
+    ArrayList<ItemBean> secondlist = new ArrayList<ItemBean>();
+    ArrayList<ItemBean> mSomeList = new ArrayList<ItemBean>();
     String urlID,banner1ID,banner2ID;
     public onDiscountDataCompleted mDataCompleted = null;
 
     int mAllCounter;
+    /**
+     * 已经获取到多少条数据了
+     */
+    int mCurrentCounter = 0;
 
 
     @Override
@@ -32,12 +38,10 @@ public class DiscountDataUtils extends AsyncTask<String, Void, ArrayList<ItemBea
             AVFile banner2;
             ItemBean tmpItemBean;
             AVQuery<AVObject> query_1 = new AVQuery<>("Sales");
-            List<AVObject> result = query_1.find();
-            Log.e("sales_size", String.valueOf(result.size()));
 
             if (!params[0].equals("")) {
                 //这个是读第二层页面.
-                query_1.whereEqualTo("discount_name", params[0]);
+                query_1.whereEqualTo("title", params[0]);
                 List<AVObject> specResult = query_1.find();
 
                 if (specResult.size() != 0) {
@@ -52,7 +56,7 @@ public class DiscountDataUtils extends AsyncTask<String, Void, ArrayList<ItemBea
                     banner1 = mSalesObject.getAVFile("banner_1");
                     banner2 = mSalesObject.getAVFile("banner_2");
 
-                    if (banner1 != null || banner2 != null) {
+                    if (banner1 != null && banner2 != null) {
                         Log.e("banner_1", banner1.toString());
 //                        urlID = logoObject.getUrl();
                         banner1ID = banner1.getUrl();
@@ -64,7 +68,7 @@ public class DiscountDataUtils extends AsyncTask<String, Void, ArrayList<ItemBea
                         tmpItemBean.setBANNER_1(banner1ID);
                         tmpItemBean.setBANNER_2(banner2ID);
                     }
-                    tmplist.add(tmpItemBean);
+                    secondlist.add(tmpItemBean);
 
                 }
             }
@@ -72,7 +76,31 @@ public class DiscountDataUtils extends AsyncTask<String, Void, ArrayList<ItemBea
                 List<AVObject> mFirstPageResult = query_1.find();
                 mAllCounter = mFirstPageResult.size();
                 if(mAllCounter != 0) {
-
+                    for (int i = 0;i<mAllCounter;i++) {
+                        tmpItemBean = new ItemBean();
+                        mSalesObject = mFirstPageResult.get(i);
+                        tmpItemBean.setTitle(mSalesObject.getString("title"));
+                        tmpItemBean.setContent(mSalesObject.getString("content"));
+                        logoObject = mSalesObject.getAVFile("sales_logo");
+                        if (logoObject != null) {
+                            urlID = logoObject.getUrl();
+                            tmpItemBean.setURL(urlID);
+                        }
+                        tmplist.add(tmpItemBean);
+                    }
+                    for (int j=0;j<6;j++) {
+                        ItemBean mSomeItem = new ItemBean();
+                        mSalesObject = mFirstPageResult.get(j);
+                        mSomeItem.setTitle(mSalesObject.getString("title"));
+                        mSomeItem.setContent(mSalesObject.getString("content"));
+                        logoObject = mSalesObject.getAVFile("sales_logo");
+                        if (logoObject != null) {
+                            urlID = logoObject.getUrl();
+                            mSomeItem.setURL(urlID);
+                        }
+                        mSomeList.add(mSomeItem);
+                        mCurrentCounter++;
+                    }
 
                 }
 
@@ -81,6 +109,12 @@ public class DiscountDataUtils extends AsyncTask<String, Void, ArrayList<ItemBea
             e.printStackTrace();
         }
 
-        return null;
+        return mSomeList;
+    }
+
+    @Override
+    protected void onPostExecute(ArrayList<ItemBean> itemBeans) {
+        mDataCompleted.onDiscountDataDone(mSomeList, tmplist, mCurrentCounter);
+        mDataCompleted.onSecondDataDone(secondlist);
     }
 }
