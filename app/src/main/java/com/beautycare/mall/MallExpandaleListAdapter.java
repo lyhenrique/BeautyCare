@@ -1,6 +1,8 @@
 package com.beautycare.mall;
 
 import android.content.Context;
+import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +15,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -24,10 +25,10 @@ public class MallExpandaleListAdapter extends BaseExpandableListAdapter {
 
     private Context tmpContext;
     private List<String> floorListHeader;
-    private HashMap<String, ArrayList<String>> ShopListData;
+    private LinkedHashMap<String, String> ShopListData;
     private DisplayImageOptions options;
 
-    public MallExpandaleListAdapter(Context context, ArrayList<String> listHeader, HashMap<String, ArrayList<String>> listChildData) {
+    public MallExpandaleListAdapter(Context context, List<String> listHeader, LinkedHashMap<String, String> listChildData) {
 
         this.tmpContext = context;
         this.floorListHeader = listHeader;
@@ -53,7 +54,7 @@ public class MallExpandaleListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return this.ShopListData.get(this.floorListHeader.get(groupPosition)).size();
+        return 1;
     }
 
     @Override
@@ -64,7 +65,7 @@ public class MallExpandaleListAdapter extends BaseExpandableListAdapter {
     @Override
     public Object getChild(int groupPosition, int childPosition) {
 
-        return this.ShopListData.get(this.floorListHeader.get(groupPosition)).get(childPosition);
+        return this.ShopListData.get(this.floorListHeader.get(groupPosition));
     }
 
     @Override
@@ -87,11 +88,15 @@ public class MallExpandaleListAdapter extends BaseExpandableListAdapter {
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) this.tmpContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.mall_expand_list_item_child, null);
+            convertView = inflater.inflate(R.layout.mall_expand_list_item_header, null);
         }
 
+        String floorName = (String) getGroup(groupPosition);
         TextView mallFloorName = (TextView) convertView.findViewById(R.id.mall_floor_name_header);
-        mallFloorName.setText("testHeader");
+        Typeface customFont = Typeface.createFromAsset(tmpContext.getAssets(), "fonts/segoe print.ttf");
+        mallFloorName.setTypeface(customFont);
+        Log.d("testTextView", mallFloorName.toString());
+        mallFloorName.setText(floorName);
 
         return convertView;
 
@@ -105,11 +110,13 @@ public class MallExpandaleListAdapter extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.mall_expand_list_item_child, null);
         }
 
-        TextView shopName = (TextView) convertView.findViewById(R.id.mall_shop_name);
+        String url = (String) getChild(groupPosition, childPosition);
+
+//        TextView shopName = (TextView) convertView.findViewById(R.id.mall_shop_name);
         ImageView shopLogo = (ImageView) convertView.findViewById(R.id.mall_shop_logo);
 
-        ImageLoader.getInstance().displayImage("", shopLogo, options);
-        shopName.setText("testShop");
+        ImageLoader.getInstance().displayImage(url, shopLogo, options);
+//        shopName.setText("testShop");
 
         return convertView;
     }

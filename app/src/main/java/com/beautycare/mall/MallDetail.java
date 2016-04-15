@@ -18,7 +18,6 @@ package com.beautycare.mall;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
@@ -128,14 +127,20 @@ public class MallDetail extends AppCompatActivity implements OnMapReadyCallback,
             receiveMallData.setMallContent(tmpdatalist.get(0).getMallContent());
             tmpLatLng = tmpdatalist.get(0).getLatLng();
 //            mallContRecy = (RecyclerView) findViewById(R.id.mall_detail_recylist);
-            expandableListView = (ExpandableListView) findViewById(R.id.mall_detail_expandList);
+
 //            expandableListAdapter = new MallExpandaleListAdapter(this, )
 
 
 //            mallContRecy.setNestedScrollingEnabled(true);
 
-            mallContRecy.setLayoutManager(new LinearLayoutManager(this));
-            mallContRecy.setAdapter(new MallDetailRecyAdapter(this, receiveMallData));
+//            mallContRecy.setLayoutManager(new LinearLayoutManager(this));
+//            mallContRecy.setAdapter(new MallDetailRecyAdapter(this, receiveMallData));
+
+            expandableListView = (ExpandableListView) findViewById(R.id.mall_detail_expandList);
+            expandableListAdapter = new MallExpandaleListAdapter(this, tmpdatalist.get(0).getFloorListHeader(),
+                    tmpdatalist.get(0).getShopListData());
+
+            expandableListView.setAdapter(expandableListAdapter);
 
             ImageLoader.getInstance().displayImage(tmpdatalist.get(0).getMallLogoURL(), mallImage, options);
             SupportMapFragment mapFragment =

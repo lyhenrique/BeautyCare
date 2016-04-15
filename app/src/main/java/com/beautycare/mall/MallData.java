@@ -2,8 +2,8 @@ package com.beautycare.mall;
 
 import com.google.android.gms.maps.model.LatLng;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * Created by peter on 3/6/2016.
@@ -15,8 +15,8 @@ public final class MallData {
     private String mallName;
     private String ID;
     private LatLng latLng;
-    private ArrayList<String> floorListHeader;
-    private HashMap<String, ArrayList<String>> ShopListData;
+    private List<String> floorListHeader;
+    private LinkedHashMap<String, String> ShopListData;
 
 //    public Data(String tmpid, String tmpurl, String tmpcontent, String tmptitle){
 //
@@ -27,21 +27,23 @@ public final class MallData {
 //    }
 
 
-    public void setShopListData(HashMap<String, ArrayList<String>> shopListData) {
+    public void setShopListData(LinkedHashMap<String, String> shopListData) {
+
         ShopListData = shopListData;
     }
 
-    public void setFloorListHeader(ArrayList<String> floorListHeader) {
+    public void setFloorListHeader(List<String> floorListHeader) {
 
         this.floorListHeader = floorListHeader;
     }
 
-    public HashMap<String, ArrayList<String>> getShopListData() {
+    public LinkedHashMap<String, String> getShopListData() {
 
         return ShopListData;
     }
 
-    public ArrayList<String> getFloorListHeader() {
+
+    public List<String> getFloorListHeader() {
 
         return floorListHeader;
     }

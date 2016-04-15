@@ -85,7 +85,7 @@ public class MallActivity extends AppCompatActivity implements OnTaskCompleted {
 //    class MyTask extends AsyncTask<Void, Void, ArrayList<MallData>> {
 //
 //        ArrayList<MallData> tmplist = new ArrayList<MallData>();
-//        String urlID;
+//        String mallLogoURL;
 //
 //        @Override
 //        protected ArrayList<MallData> doInBackground(Void... params) {
@@ -127,9 +127,9 @@ public class MallActivity extends AppCompatActivity implements OnTaskCompleted {
 //
 //                        if( logoObject != null) {
 //                            Log.d("logoObject", logoObject.toString());
-//                            urlID = logoObject.getUrl();//获取了AVFile之后可以直接获取url
-//                            Log.d("urlID", urlID);
-//                            tmpData.setMallURL(urlID);
+//                            mallLogoURL = logoObject.getUrl();//获取了AVFile之后可以直接获取url
+//                            Log.d("mallLogoURL", mallLogoURL);
+//                            tmpData.setMallURL(mallLogoURL);
 //                        }
 //                        tmplist.add(i, tmpData);//将获取的数据加入全局的一个ArrayList
 //                        Log.d("data", tmplist.get(i).getMallName());

@@ -9,7 +9,7 @@ import com.avos.avoscloud.AVQuery;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -18,17 +18,20 @@ import java.util.List;
 public class GetMallDataTask extends AsyncTask<String, Void, ArrayList<MallData>> {
 
     ArrayList<MallData> tmplist = new ArrayList<MallData>();
-    String urlID;
+    String mallLogoURL, shopListURL;
     public OnTaskCompleted taskCompleted = null;
     private List<String> floorListHeader;
-    private HashMap<String, ArrayList<String>> ShopListData;
+    private LinkedHashMap<String, String> shopListData;
 
     @Override
     protected ArrayList<MallData> doInBackground(String... params) {
         try {
 
-            AVObject mallObject;
-            AVFile logoObject;
+            AVObject mallObject, floorObject;
+            AVFile logoObject, shopListObject;
+            String floor;
+            floorListHeader = new ArrayList<String>();
+            shopListData = new LinkedHashMap<String, String>();
             Double lat, lon;
             AVQuery<AVObject> mallQuery = new AVQuery<>("Mall");//封装后，这里可以考虑传parms进来
             AVQuery<AVObject> mall2shopQuery = new AVQuery<>("Shops");
@@ -52,23 +55,27 @@ public class GetMallDataTask extends AsyncTask<String, Void, ArrayList<MallData>
 
                     logoObject = mallObject.getAVFile("mall_logo");
                     if (logoObject != null) {
-                        urlID = logoObject.getUrl();
-                        tmpMallData.setMallLogoURL(urlID);
+                        mallLogoURL = logoObject.getUrl();
+                        tmpMallData.setMallLogoURL(mallLogoURL);
                     }
 
 
-                    while (floorShopResult.size() != 0) {
-                        int x = 0;
+                    for (int x = floorShopResult.size(); x > 0; x--) {
+                        floorObject = floorShopResult.get(x - 1);
+                        floor = floorObject.getString("floor");
+                        floorListHeader.add(floor);
+                        shopListObject = floorObject.getAVFile("floor_shops");
 
-                        while (floorShopResult.get(x).getNumber("floor_num") == x+1)
-                        {
-
-
-                            x++;
+                        if (shopListObject != null) {
+                            shopListURL = shopListObject.getUrl();
+                            shopListData.put(floor, shopListURL);
                         }
-
                     }
-                    Log.d("testShopResult", floorShopResult.toString());
+
+                    tmpMallData.setFloorListHeader(floorListHeader);
+                    tmpMallData.setShopListData(shopListData);
+
+//                    Log.d("testShopResult", floorShopResult.toString());
 
 
                     tmplist.add(tmpMallData);
@@ -107,9 +114,9 @@ public class GetMallDataTask extends AsyncTask<String, Void, ArrayList<MallData>
 
                         if (logoObject != null) {
                             Log.d("logoObject", logoObject.toString());
-                            urlID = logoObject.getUrl();//获取了AVFile之后可以直接获取url
-                            Log.d("urlID", urlID);
-                            tmpMallData.setMallLogoURL(urlID);
+                            mallLogoURL = logoObject.getUrl();//获取了AVFile之后可以直接获取url
+                            Log.d("mallLogoURL", mallLogoURL);
+                            tmpMallData.setMallLogoURL(mallLogoURL);
                         }
                         tmplist.add(i, tmpMallData);//将获取的数据加入全局的一个ArrayList
                         Log.d("data", tmplist.get(i).getMallName());
