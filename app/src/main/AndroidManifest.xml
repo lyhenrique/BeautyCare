@@ -2,11 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.beautycare">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/beautycare_logo"
         android:label="@string/app_name"
+        android:logo="@mipmap/beautycare_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -27,25 +34,77 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".makeup.makeupIndex"></activity>
-
-        <activity android:name=".makeup.MakeupDetails"></activity>
-
-        <activity android:name=".strategy.StrategyMain"></activity>
-
-        <activity android:name=".strategy.StrategyDetails"></activity>
-
-        <activity android:name=".mall.MallActivity"></activity>
-
-        <activity android:name=".mall.MallDetail"></activity>
-
-        <activity android:name=".discountpage.DiscountDetails"></activity>
-
-        <activity android:name=".discountpage.DiscountIndex"></activity>
-
-        <activity android:name=".discountpage.SeeBigImg"
+        <activity
+            android:name=".makeup.makeupIndex"
             android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
+
+        <activity
+            android:name=".makeup.MakeupDetails"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".makeup.comment"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".strategy.StrategyMain"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".strategy.StrategyDetails"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".mall.MallActivity"
+            android:theme="@style/AppTheme" >
+
+        </activity>
+
+        <activity
+            android:name=".mall.MallDetail"
+            android:theme="@style/AppTheme" >
+
+        </activity>
+
+        <activity
+            android:name=".discountpage.DiscountDetails"
+            android:theme="@style/AppTheme" ></activity>
+
+        <activity
+            android:name=".discountpage.DiscountIndex"
+            android:theme="@style/AppTheme" ></activity>
+
+        <activity
+            android:name=".discountpage.SeeBigImg"
+            android:theme="@style/AppTheme"></activity>
 
 
         <meta-data
@@ -53,12 +112,6 @@
             android:value="AIzaSyA7E_zW91dyw2AGg_nSnSAMvzF_ZEeQb1M" />
 
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 
 </manifest>
