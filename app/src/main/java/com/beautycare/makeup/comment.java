@@ -24,6 +24,7 @@ public class comment extends AppCompatActivity {
     private String merchant_comment;
     private String merchant_name;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
