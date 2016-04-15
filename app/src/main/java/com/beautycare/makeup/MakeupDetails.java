@@ -213,6 +213,7 @@ public class MakeupDetails extends AppCompatActivity implements BaseSliderView.O
         Intent intent = new Intent(this, comment.class);
         Bundle bundle = new Bundle();
         bundle.putString("merchantName",item_name);
+        bundle.putString("category","Makeup");
         intent.putExtras(bundle);
         startActivity(intent);
 
