@@ -23,7 +23,7 @@ public class comment extends AppCompatActivity {
     private float merchant_mark;
     private String merchant_comment;
     private String merchant_name;
-
+    private String category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class comment extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         merchant_name = bundle.getString("merchantName");
-
+        category = bundle.getString("category");
 
         mark.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -66,7 +66,7 @@ public class comment extends AppCompatActivity {
     private class sendComment extends AsyncTask<Void, Void, Void> {
         protected Void doInBackground(Void... params) {
             AVObject post = new AVObject("comment");
-            post.put("category", "Makeup");
+            post.put("category", category);
             post.put("merchant_name",merchant_name);
             post.put("user","tourist");
             post.put("mark",merchant_mark);

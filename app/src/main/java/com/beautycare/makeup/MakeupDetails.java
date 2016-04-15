@@ -213,6 +213,7 @@ public class MakeupDetails extends AppCompatActivity implements BaseSliderView.O
         Intent intent = new Intent(this, comment.class);
         Bundle bundle = new Bundle();
         bundle.putString("merchantName",item_name);
+        bundle.putString("category","Makeup");
         intent.putExtras(bundle);
         startActivity(intent);
 
@@ -297,87 +298,6 @@ public class MakeupDetails extends AppCompatActivity implements BaseSliderView.O
 
         }
     }
-    class MyTask extends AsyncTask<Void, Void, ArrayList<MallData>> {
-
-        ArrayList<MallData> tmplist = new ArrayList<MallData>();
-        String urlID;
-
-        @Override
-        protected ArrayList<MallData> doInBackground(Void... params) {
-            //这个方法是在onPreExecute后执行的，params参数的类型是第一个Void，返回的类型是第三个ArrayList<Data>，返回的参数会传到onPostExecute
-
-            try {
-                AVObject mallObject;
-                AVFile logoObject;
-                Double lat, lon;
-//                AVCloudQueryResult result = AVQuery.doCloudQuery("select * from Mall");
-                AVQuery<AVObject> query_1 = new AVQuery<>("Mall");//封装后，这里可以考虑传parms进来
-
-                //List<AVObject> result = query_1.find();//查询并传数据到result
-
-                List<AVObject> result = query_1.whereEqualTo("mall_name",clickLocation).find();//分类筛选，第一个parameter为属性（key）,第二个为想选择的值，类似where category = 'cosmetics'
-
-                Log.d("mall_size", String.valueOf(result.size()));
-                if (result.size() != 0) {
-
-                    for (int i = 0; i < result.size(); i++) {
-
-                        MallData tmpMallData = new MallData();//封装好的数据类型
-                        mallObject = result.get(i);//获取第i个AVObject
-
-                        tmpMallData.setMallName(mallObject.getString("mall_name"));
-                        tmpMallData.setMallContent(mallObject.getString("content"));
-
-                        tmpMallData.setID(mallObject.getObjectId());
-
-                        lat = mallObject.getDouble("Lat");//获取坐标
-                        lon = mallObject.getDouble("Lon");
-                        tmpMallData.setLatLng(new LatLng(lat,lon));
-
-                        logoObject = mallObject.getAVFile("mall_logo");
-
-                        if( logoObject != null) {
-                            urlID = logoObject.getUrl();//获取了AVFile之后可以直接获取url
-                            tmpMallData.setMallLogoURL(urlID);
-                        }
-                        tmplist.add(i, tmpMallData);//将获取的数据加入全局的一个ArrayList
-
-                    }
-                }
-
-            } catch (Exception e) {
-
-                Log.d("exception", String.valueOf(e));
-            }
-            return tmplist;
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<MallData> tmpdatalist) {
-
-            Intent intent = new Intent(MakeupDetails.this, MallDetail.class);
-            Bundle bundle = new Bundle();
-            bundle.putString("url", tmpdatalist.get(0).getMallLogoURL());
-            bundle.putString("content", tmpdatalist.get(0).getMallContent());
-            bundle.putString("name", tmpdatalist.get(0).getMallName());
-            bundle.putParcelable("latlng", tmpdatalist.get(0).getLatLng());
-            intent.putExtras(bundle);
-            startActivity(intent);
-        }
-
-        @Override
-        protected void onPreExecute() {
-
-            /*这个是AsyncTask最开始的动作，这里我们可以初始化一些东西，比如说这个很重要的云数据需要初始，
-            * 下面两个很奇怪的参数我自己账户中建了一个应用，然后就会提供应用的id和key,如果大家想试的话，
-            * 我把我的账号密码给你们，暂时不知道能不能同时登，
-            * 账号：maskliang@gmail.com
-            * 密码：fgh159456IOP*/
-            AVOSCloud.initialize(MakeupDetails.this, "lpjA6quucO5BzlmMPxTrjKwD-gzGzoHsz", "vu6uDC74NlzzJP4YbrJmDFV6");
-
-        }
-    }
-
 
     @Override
     protected void onStop() {
