@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.beautycare.R;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
 import java.util.ArrayList;
 
@@ -19,7 +18,6 @@ public class commentAdapter extends BaseAdapter {
     private ArrayList<commentItems> mList;
     private LayoutInflater mInflater;
     private Context c;
-    private DisplayImageOptions options;
 
     public commentAdapter(Context context, ArrayList<commentItems> list) {
         mList = list;
