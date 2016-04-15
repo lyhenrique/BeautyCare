@@ -184,9 +184,14 @@ public class MakeupDetails extends AppCompatActivity implements BaseSliderView.O
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(MakeupDetails.this,loc.get(position).toString(), Toast.LENGTH_SHORT).show();
 
-                clickLocation = loc.get(position).toString();
-
-                new MyTask().execute();
+//                clickLocation = loc.get(position).toString();
+//
+//                new MyTask().execute();
+                Intent intent = new Intent(MakeupDetails.this,MallDetail.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("MallName",loc.get(position).toString());
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 
