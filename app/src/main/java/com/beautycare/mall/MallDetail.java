@@ -18,10 +18,11 @@ package com.beautycare.mall;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 
 import com.avos.avoscloud.AVOSCloud;
@@ -50,6 +51,9 @@ public class MallDetail extends AppCompatActivity implements OnMapReadyCallback,
     private GetMallDataTask getDataInDetailPage;
     private String mallname = null;
     private LatLng tmpLatLng;
+    private ExpandableListAdapter expandableListAdapter;
+    private ExpandableListView expandableListView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,14 +66,18 @@ public class MallDetail extends AppCompatActivity implements OnMapReadyCallback,
 
         setTitle("Mall");
 
+
+//        expandableListAdapter = new MallExpandaleListAdapter(this, )
+
+
         options = new DisplayImageOptions.Builder()
-         //       .showImageOnLoading(R.drawable.ic_stub)
+//                .showImageOnLoading(R.drawable.ic_stub)
                 .showStubImage(R.drawable.ic_stub)
                 .showImageForEmptyUri(R.drawable.ic_empty)
                 .showImageOnFail(R.drawable.ic_error)
                 .cacheInMemory()
                 .cacheOnDisc()
-        //        .cacheOnDisk(true)
+//                .cacheOnDisk(true)
                 .imageScaleType(ImageScaleType.EXACTLY)
                 .build();
 
@@ -79,18 +87,9 @@ public class MallDetail extends AppCompatActivity implements OnMapReadyCallback,
 
         receiveBundleData = getIntent().getExtras();
         mallname = receiveBundleData.getString("MallName");//其他页面传商场名字参数即可，键名统一为为MallName
-//        receiveMallData.setMallURL(receiveBundleData.getString("url"));
-//        receiveMallData.setMallContent(receiveBundleData.getString("content"));
-//        receiveMallData.setMallName(receiveBundleData.getString("name"));
-//        receiveMallData.setLatLng((LatLng) receiveBundleData.get("latlng"));
-
         mallImage = (ImageView) findViewById(R.id.mall_logo_image);
 
-
-
         getDataInDetailPage.execute(mallname);
-
-
 
     }
 
@@ -127,12 +126,21 @@ public class MallDetail extends AppCompatActivity implements OnMapReadyCallback,
             receiveMallData.setMallLogoURL(tmpdatalist.get(0).getMallLogoURL());
             receiveMallData.setMallContent(tmpdatalist.get(0).getMallContent());
             tmpLatLng = tmpdatalist.get(0).getLatLng();
-            mallContRecy = (RecyclerView) findViewById(R.id.mall_detail_recylist);
+//            mallContRecy = (RecyclerView) findViewById(R.id.mall_detail_recylist);
 
-            mallContRecy.setNestedScrollingEnabled(true);
+//            expandableListAdapter = new MallExpandaleListAdapter(this, )
 
-            mallContRecy.setLayoutManager(new LinearLayoutManager(this));
-            mallContRecy.setAdapter(new MallDetailRecyAdapter(this, receiveMallData));
+
+//            mallContRecy.setNestedScrollingEnabled(true);
+
+//            mallContRecy.setLayoutManager(new LinearLayoutManager(this));
+//            mallContRecy.setAdapter(new MallDetailRecyAdapter(this, receiveMallData));
+
+            expandableListView = (ExpandableListView) findViewById(R.id.mall_detail_expandList);
+            expandableListAdapter = new MallExpandaleListAdapter(this, tmpdatalist.get(0).getFloorListHeader(),
+                    tmpdatalist.get(0).getShopListData());
+
+            expandableListView.setAdapter(expandableListAdapter);
 
             ImageLoader.getInstance().displayImage(tmpdatalist.get(0).getMallLogoURL(), mallImage, options);
             SupportMapFragment mapFragment =

@@ -9,58 +9,82 @@ import com.avos.avoscloud.AVQuery;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
  * Created by peter on 4/12/2016.
  */
-public class GetMallDataTask extends AsyncTask <String, Void, ArrayList<MallData>> {
+public class GetMallDataTask extends AsyncTask<String, Void, ArrayList<MallData>> {
 
     ArrayList<MallData> tmplist = new ArrayList<MallData>();
-    String urlID;
+    String mallLogoURL, shopListURL;
     public OnTaskCompleted taskCompleted = null;
-    ArrayList<MallData> mallDataList = new ArrayList<MallData>();
+    private List<String> floorListHeader;
+    private LinkedHashMap<String, String> shopListData;
 
     @Override
     protected ArrayList<MallData> doInBackground(String... params) {
         try {
 
-            AVObject mallObject;
-            AVFile logoObject;
+            AVObject mallObject, floorObject;
+            AVFile logoObject, shopListObject;
+            String floor;
+            floorListHeader = new ArrayList<String>();
+            shopListData = new LinkedHashMap<String, String>();
             Double lat, lon;
-            AVQuery<AVObject> query = new AVQuery<>("Mall");//封装后，这里可以考虑传parms进来
-            MallData tmpMallData = null;
-            if (!params[0].equals(""))
-            {
+            AVQuery<AVObject> mallQuery = new AVQuery<>("Mall");//封装后，这里可以考虑传parms进来
+            AVQuery<AVObject> mall2shopQuery = new AVQuery<>("Shops");
+//            AVQuery<AVObject> shop2floorQuery = new AVQuery<>("Shops");
+            MallData tmpMallData;
+            if (!params[0].equals("")) {
 
-                query.whereEqualTo("mall_name", params[0]);
-                List<AVObject> specResult = query.find();
+                mallQuery.whereEqualTo("mall_name", params[0]);
+                List<AVObject> specResult = mallQuery.find();
 
-                if( specResult.size() != 0 )
-                {
+                mall2shopQuery.whereEqualTo("mall_name", params[0]);
+                List<AVObject> floorShopResult = mall2shopQuery.find();
+                if (specResult.size() != 0 || floorShopResult.size() != 0) {
                     mallObject = specResult.get(0);
                     Log.d("dataNameMall", mallObject.getString("mall_name"));
                     tmpMallData = new MallData();
                     tmpMallData.setMallName(mallObject.getString("mall_name"));
                     lat = mallObject.getDouble("Lat");
                     lon = mallObject.getDouble("Lon");
-                    tmpMallData.setLatLng(new LatLng(lat,lon));
+                    tmpMallData.setLatLng(new LatLng(lat, lon));
 
                     logoObject = mallObject.getAVFile("mall_logo");
-                    if( logoObject != null)
-                    {
-                        urlID = logoObject.getUrl();
-                        tmpMallData.setMallLogoURL(urlID);
+                    if (logoObject != null) {
+                        mallLogoURL = logoObject.getUrl();
+                        tmpMallData.setMallLogoURL(mallLogoURL);
                     }
+
+
+                    for (int x = floorShopResult.size(); x > 0; x--) {
+                        floorObject = floorShopResult.get(x - 1);
+                        floor = floorObject.getString("floor");
+                        floorListHeader.add(floor);
+                        shopListObject = floorObject.getAVFile("floor_shops");
+
+                        if (shopListObject != null) {
+                            shopListURL = shopListObject.getUrl();
+                            shopListData.put(floor, shopListURL);
+                        }
+                    }
+
+                    tmpMallData.setFloorListHeader(floorListHeader);
+                    tmpMallData.setShopListData(shopListData);
+
+//                    Log.d("testShopResult", floorShopResult.toString());
+
 
                     tmplist.add(tmpMallData);
                 }
 
                 Log.d("mall_size_notnull", String.valueOf(specResult.size()));
                 Log.d("tmpLIST", String.valueOf(tmplist.size()));
-            }
-            else {
-                List<AVObject> result = query.find();//查询并传数据到result
+            } else {
+                List<AVObject> result = mallQuery.find();//查询并传数据到result
                 Log.d("mall_size", String.valueOf(result.size()));
                 if (result.size() != 0) {
 
@@ -90,9 +114,9 @@ public class GetMallDataTask extends AsyncTask <String, Void, ArrayList<MallData
 
                         if (logoObject != null) {
                             Log.d("logoObject", logoObject.toString());
-                            urlID = logoObject.getUrl();//获取了AVFile之后可以直接获取url
-                            Log.d("urlID", urlID);
-                            tmpMallData.setMallLogoURL(urlID);
+                            mallLogoURL = logoObject.getUrl();//获取了AVFile之后可以直接获取url
+                            Log.d("mallLogoURL", mallLogoURL);
+                            tmpMallData.setMallLogoURL(mallLogoURL);
                         }
                         tmplist.add(i, tmpMallData);//将获取的数据加入全局的一个ArrayList
                         Log.d("data", tmplist.get(i).getMallName());
