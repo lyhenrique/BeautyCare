@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.beautycare.R;
-import com.beautycare.strategy.StrategyData;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
