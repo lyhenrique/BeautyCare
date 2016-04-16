@@ -40,7 +40,7 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import java.util.ArrayList;
 
 
-public class MallDetail extends AppCompatActivity implements OnMapReadyCallback,OnTaskCompleted {
+public class MallDetail extends AppCompatActivity implements OnMapReadyCallback, OnTaskCompleted {
 
 
     private RecyclerView mallContRecy;
@@ -62,14 +62,7 @@ public class MallDetail extends AppCompatActivity implements OnMapReadyCallback,
         setContentView(R.layout.mall_detail_main);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         AVOSCloud.initialize(MallDetail.this, "lpjA6quucO5BzlmMPxTrjKwD-gzGzoHsz", "vu6uDC74NlzzJP4YbrJmDFV6");
-//        mallRecyList = (RecyclerView) findViewById(R.id.mall_list_main);
-
         setTitle("Mall");
-
-
-//        expandableListAdapter = new MallExpandaleListAdapter(this, )
-
-
         options = new DisplayImageOptions.Builder()
 //                .showImageOnLoading(R.drawable.ic_stub)
                 .showStubImage(R.drawable.ic_stub)
@@ -119,22 +112,12 @@ public class MallDetail extends AppCompatActivity implements OnMapReadyCallback,
     public void processFinish(ArrayList<MallData> tmpdatalist) {
 
 
-        if( tmpdatalist.size() != 0 )
-        {
+        if (tmpdatalist.size() != 0) {
             Log.d("dataTest", tmpdatalist.get(0).toString());
             receiveMallData.setLatLng(tmpdatalist.get(0).getLatLng());
             receiveMallData.setMallLogoURL(tmpdatalist.get(0).getMallLogoURL());
             receiveMallData.setMallContent(tmpdatalist.get(0).getMallContent());
             tmpLatLng = tmpdatalist.get(0).getLatLng();
-//            mallContRecy = (RecyclerView) findViewById(R.id.mall_detail_recylist);
-
-//            expandableListAdapter = new MallExpandaleListAdapter(this, )
-
-
-//            mallContRecy.setNestedScrollingEnabled(true);
-
-//            mallContRecy.setLayoutManager(new LinearLayoutManager(this));
-//            mallContRecy.setAdapter(new MallDetailRecyAdapter(this, receiveMallData));
 
             expandableListView = (ExpandableListView) findViewById(R.id.mall_detail_expandList);
             expandableListAdapter = new MallExpandaleListAdapter(this, tmpdatalist.get(0).getFloorListHeader(),
@@ -146,9 +129,7 @@ public class MallDetail extends AppCompatActivity implements OnMapReadyCallback,
             SupportMapFragment mapFragment =
                     (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
             mapFragment.getMapAsync(this);
-        }
-
-        else {
+        } else {
 
             Log.d("TestTest", String.valueOf(tmpdatalist.size()));
         }
@@ -177,7 +158,7 @@ public class MallDetail extends AppCompatActivity implements OnMapReadyCallback,
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home :
+            case android.R.id.home:
                 finish();
                 return true;
         }

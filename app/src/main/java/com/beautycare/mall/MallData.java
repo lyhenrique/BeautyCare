@@ -18,15 +18,6 @@ public final class MallData {
     private List<String> floorListHeader;
     private LinkedHashMap<String, String> ShopListData;
 
-//    public Data(String tmpid, String tmpurl, String tmpcontent, String tmptitle){
-//
-//        mallLogoURL=tmpurl;
-//        mallContent=tmpcontent;
-//        mallName=tmptitle;
-//        ID=tmpid;
-//    }
-
-
     public void setShopListData(LinkedHashMap<String, String> shopListData) {
 
         ShopListData = shopListData;
