@@ -3,6 +3,7 @@ package com.beautycare.makeup;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -31,6 +32,10 @@ import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.google.android.gms.maps.model.LatLng;
 import com.beautycare.mall.MallData;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -226,7 +231,23 @@ public class MakeupDetails extends AppCompatActivity implements BaseSliderView.O
 
     }
     public void collect(View view){
-        Toast.makeText(this,"collect",Toast.LENGTH_LONG).show();
+        String str = item_name;
+        try {
+            File sdCard = Environment.getExternalStorageDirectory();
+            File directory = new File(sdCard.getAbsoluteFile() + "/MyFiles");
+            directory.mkdirs();
+            File file = new File(directory, "textfile.txt");
+            FileOutputStream fOut = new FileOutputStream(file);
+            OutputStreamWriter osw = new OutputStreamWriter(fOut);
+// --- Write the string to the file ---
+            osw.write(str);
+            osw.flush();
+            osw.close();
+//--- Set the EditText to the text that has been read ---
+            Toast.makeText(this, "collect", Toast.LENGTH_LONG).show();
+        }catch (IOException ioe){
+            ioe.printStackTrace();
+        }
     }
 
 

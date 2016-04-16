@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.beautycare.R;
+import com.beautycare.strategy.StrategyData;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
@@ -114,8 +115,10 @@ public class StrategyAdapter extends BaseAdapter {
         final String strategyTitle = bean.getItemTitle();
         final String strategyAbstract = bean.getItemAbstract();
         final String strategyDetails = bean.getItemDetails();
+        final String strategyVideo = bean.getItemVideo();
         final int mark = bean.getMark();
         final int like = bean.getLike();
+
         final ArrayList<String> flipper = bean.getFlipper();
 
         viewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
@@ -128,8 +131,10 @@ public class StrategyAdapter extends BaseAdapter {
                 bundle.putString("strategyTitle", strategyTitle);
                 bundle.putString("strategyAbstract", strategyAbstract);
                 bundle.putString("strategyDetails", strategyDetails);
+                bundle.putString("strategyVideo", strategyVideo);
                 bundle.putInt("mark", mark);
                 bundle.putInt("like", like);
+
                 bundle.putString("FlipperImage1", flipper.get(0));
                 bundle.putString("FlipperImage2", flipper.get(1));
                 bundle.putString("FlipperImage3", flipper.get(2));
@@ -148,8 +153,10 @@ public class StrategyAdapter extends BaseAdapter {
                 bundle.putString("strategyTitle", strategyTitle);
                 bundle.putString("strategyAbstract", strategyAbstract);
                 bundle.putString("strategyDetails", strategyDetails);
+                bundle.putString("strategyVideo", strategyVideo);
                 bundle.putInt("mark", mark);
                 bundle.putInt("like", like);
+
                 bundle.putString("FlipperImage1", flipper.get(0));
                 bundle.putString("FlipperImage2", flipper.get(1));
                 bundle.putString("FlipperImage3", flipper.get(2));
@@ -168,8 +175,10 @@ public class StrategyAdapter extends BaseAdapter {
                 bundle.putString("strategyTitle", strategyTitle);
                 bundle.putString("strategyAbstract", strategyAbstract);
                 bundle.putString("strategyDetails", strategyDetails);
+                bundle.putString("strategyVideo", strategyVideo);
                 bundle.putInt("mark", mark);
                 bundle.putInt("like", like);
+
                 bundle.putString("FlipperImage1", flipper.get(0));
                 bundle.putString("FlipperImage2", flipper.get(1));
                 bundle.putString("FlipperImage3", flipper.get(2));

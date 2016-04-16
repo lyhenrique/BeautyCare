@@ -164,7 +164,8 @@ public class StrategyLady extends Fragment implements BGARefreshLayout.BGARefres
             protected void onPostExecute(Void aVoid) {
                 //getData(itemlist,"Refresh","refresh brand");
                 for(int i = 0; i < 5; i++) {
-
+                    //itemlist.add(0, new MakeupItems("Refresh item "+i, "Refresh brand "+i, R.drawable.new_arrival_5));
+                    //mRefreshLayout.endRefreshing();
                 }
             }
         }.execute();
@@ -285,6 +286,7 @@ public class StrategyLady extends Fragment implements BGARefreshLayout.BGARefres
                         tmpData.setItemTitle(strategyObject.getString("itemTitle"));
                         tmpData.setItemAbstract(strategyObject.getString("itemAbstract"));
                         tmpData.setItemDetails(strategyObject.getString("itemDetails"));
+                        tmpData.setItemVideo(strategyObject.getString("itemVideo"));
                         tmpData.setMark(strategyObject.getInt("mark"));
                         tmpData.setLike(strategyObject.getInt("like"));
 
@@ -326,7 +328,7 @@ public class StrategyLady extends Fragment implements BGARefreshLayout.BGARefres
             initImageLoader(getActivity());
 
             mImageLoader= ImageLoader.getInstance();
-            StrategyAdapter adapter = new StrategyAdapter(getActivity(), dataList);
+            com.beautycare.strategy.StrategyAdapter adapter = new com.beautycare.strategy.StrategyAdapter(getActivity(), dataList);
             listAll.setAdapter(adapter);
 
         }

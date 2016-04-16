@@ -11,6 +11,7 @@ public class StrategyData {
     private String itemTitle;
     private String itemAbstract;
     private String itemDetails;
+    private String itemVideo;
     private int mark;
     private int like;
 
@@ -27,6 +28,7 @@ public class StrategyData {
     public void setItemTitle(String itemTitle){this.itemTitle = itemTitle; }
     public void setItemAbstract(String itemAbstract){ this.itemAbstract = itemAbstract;}
     public void setItemDetails(String itemDetails){ this.itemDetails = itemDetails;}
+    public void setItemVideo(String itemVideo){this.itemVideo = itemVideo;}
     public void setMark(int mark){this.mark = mark; }
     //public void setImages(String image_url, String image_content){this.images.add(new MakeupImage(image_url,image_content)); }
     public void setLike(int like){this.like = like;}
@@ -43,9 +45,12 @@ public class StrategyData {
     public String getItemTitle(){return itemTitle;}
     public String getItemAbstract(){return itemAbstract;}
     public String getItemDetails(){return itemDetails;}
+    public String getItemVideo(){return itemVideo;}
     public int getMark(){return mark;}
     //public ArrayList<MakeupImage> getImages(){return images;}
     public int getLike(){return like;}
+
+
 
     public ArrayList<String> getFlipper(){return flipper;}
     public String getMore() { return  more; }

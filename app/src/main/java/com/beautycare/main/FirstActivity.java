@@ -1,26 +1,37 @@
 package com.beautycare.main;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.beautycare.R;
+import com.beautycare.strategy.StrategyMain;
 import com.beautycare.discountpage.DiscountIndex;
 import com.beautycare.main.widget.CycleIndicator;
 import com.beautycare.main.widget.ImagePager;
-import com.beautycare.makeup.makeupIndex;
-import com.beautycare.mall.MallActivity;
-import com.beautycare.strategy.StrategyMain;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.beautycare.mall.MallActivity;
+import com.beautycare.makeup.makeupIndex;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Created by owner on 2016/2/5.
@@ -31,7 +42,7 @@ public class FirstActivity extends FragmentActivity {
 
     private Handler mHandler = new Handler();
     // 图片轮转
-    int[] resIds = new int[]{R.drawable.homepage_cycle_1, R.drawable.homepage_cycle_2, R.drawable.homepage_cycle_3,R.drawable.homepage_cycle_4};
+    int[] resIds = new int[]{R.drawable.homepage_cycle_1, R.drawable.homepage_cycle_2, R.drawable.homepage_cycle_3, R.drawable.homepage_cycle_4};
     private GoogleApiClient client;
 
     @Override
@@ -47,7 +58,7 @@ public class FirstActivity extends FragmentActivity {
 
 
         ImagePager ip = (ImagePager) findViewById(R.id.pager0);
-        ip.setViews(new int[]{R.drawable.homepage_cycle_1, R.drawable.homepage_cycle_2, R.drawable.homepage_cycle_3,R.drawable.homepage_cycle_4});
+        ip.setViews(new int[]{R.drawable.homepage_cycle_1, R.drawable.homepage_cycle_2, R.drawable.homepage_cycle_3, R.drawable.homepage_cycle_4});
 
         final CycleIndicator indicator0 = (CycleIndicator) findViewById(R.id.indicator0);
         indicator0.setPageCount(5);
@@ -121,7 +132,6 @@ public class FirstActivity extends FragmentActivity {
     @Override
     public void onStart() {
         super.onStart();
-
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
@@ -136,6 +146,7 @@ public class FirstActivity extends FragmentActivity {
                 Uri.parse("android-app://com.beautycare/http/host/path")
         );
         AppIndex.AppIndexApi.start(client, viewAction);
+
     }
 
     @Override
@@ -199,6 +210,74 @@ public class FirstActivity extends FragmentActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }
+
+    //
+    public static class SaveBitmap {
+        private final static String CACHE = "/css";
+
+        public static void saveImage(Bitmap bitmap, String imageName) throws Exception {
+            String filePath = isExistsFilePath();
+            FileOutputStream fos = null;
+            File file = new File(filePath, imageName);
+            try {
+                fos = new FileOutputStream(file);
+                if (null != fos) {
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 90, fos);
+                    fos.flush();
+                    fos.close();
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public static String getSDPath() {
+            File sdDir = null;
+            boolean sdCardExist = Environment.getExternalStorageState().equals(
+                    Environment.MEDIA_MOUNTED); // 判断sd卡是否存在
+            if (sdCardExist) {
+                sdDir = Environment.getExternalStorageDirectory();// 获取根目录
+            } else {
+                Log.e("ERROR", "没有内存卡");
+            }
+            return sdDir.toString();
+        }
+
+        private static String isExistsFilePath() {
+            String filePath = getSDPath() + CACHE;
+            File file = new File(filePath);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            return filePath;
+        }
+
+        public static Bitmap getImageFromSDCard(String imageName) {
+            String filepath = getSDPath() + CACHE  + "/" + imageName;
+            File file = new File(filepath);
+            if (file.exists()) {
+                Bitmap bm = BitmapFactory.decodeFile(filepath);
+                return bm;
+            }
+            return null;
+        }
+    }
+
+
+    public void p2(View view){
+        try {
+            new SaveBitmap();
+            Resources res = getResources();
+            Bitmap bmp = BitmapFactory.decodeResource(res, R.drawable.new_arrival_2);
+            SaveBitmap.saveImage(bmp, "picture");
+            Toast.makeText(getBaseContext(),"Save Successfully!",Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }

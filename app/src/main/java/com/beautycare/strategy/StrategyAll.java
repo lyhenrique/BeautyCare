@@ -201,7 +201,7 @@ public class StrategyAll extends Fragment implements BGARefreshLayout.BGARefresh
         new strategy_all_readdata().execute();
     }
 
-   @Override
+    @Override
     public void onStart() {
         super.onStart();
     }
@@ -286,6 +286,7 @@ public class StrategyAll extends Fragment implements BGARefreshLayout.BGARefresh
                         tmpData.setItemTitle(strategyObject.getString("itemTitle"));
                         tmpData.setItemAbstract(strategyObject.getString("itemAbstract"));
                         tmpData.setItemDetails(strategyObject.getString("itemDetails"));
+                        tmpData.setItemVideo(strategyObject.getString("itemVideo"));
                         tmpData.setMark(strategyObject.getInt("mark"));
                         tmpData.setLike(strategyObject.getInt("like"));
 
@@ -325,7 +326,7 @@ public class StrategyAll extends Fragment implements BGARefreshLayout.BGARefresh
             initImageLoader(getActivity());
 
             mImageLoader= ImageLoader.getInstance();
-            StrategyAdapter adapter = new StrategyAdapter(getActivity(), dataList);
+            com.beautycare.strategy.StrategyAdapter adapter = new com.beautycare.strategy.StrategyAdapter(getActivity(), dataList);
             listAll.setAdapter(adapter);
 
         }

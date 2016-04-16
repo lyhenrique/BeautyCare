@@ -6,6 +6,8 @@
     android:orientation="vertical"
     android:weightSum="1">
 
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -17,78 +19,27 @@
             android:orientation="vertical"
             android:weightSum="1">
 
-            <RelativeLayout
+            <TextView
+                android:id="@+id/strategy_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                android:text="Eye Cream"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/colorAccent"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <WebView
+                android:id="@+id/webView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/strategyImage"
-                    android:layout_width="300dp"
-                    android:layout_height="300dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="18dp"
-                    android:src="@drawable/all" />
-
-                <TextView
-                    android:id="@+id/strategy_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/strategyImage"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="22dp"
-                    android:text="Eye Cream"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="25dp"
-                    android:textStyle="bold" />
-
-                <RelativeLayout
-                    android:id="@+id/mark_relative"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/strategy_title"
-                    android:layout_marginTop="20dp">
-
-                    <TextView
-                        android:id="@+id/markTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Mark:"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="20dp"
-                        android:layout_marginLeft="146dp"
-                        android:layout_marginStart="146dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true" />
-
-                    <TextView
-                        android:id="@+id/mark"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="4.9"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="20dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_toRightOf="@+id/markTitle"
-                        android:layout_toEndOf="@+id/markTitle" />
-                </RelativeLayout>
-                <RatingBar
-                    android:id="@+id/rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/mark_relative"
-                    android:layout_centerHorizontal="true"
-                    android:isIndicator="true"
-                    android:numStars="5" />
-            </RelativeLayout>
-
-
-
+                android:layout_height="250dp"
+                android:layout_x="0px"
+                android:layout_y="69px"
+                android:visibility="visible"></WebView>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -186,16 +137,9 @@
                         android:textSize="25dp"
                         android:textStyle="bold" />
                 </RelativeLayout>
-
-                <ListView
-                    android:id="@+id/commentList"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:background="#f2f2f2" />
+                <!--你直接include这个按钮集合到你的details界面就行，这么做只是因为details页面太长了，写在后面的看不到效果，用这个比较方便-->
+                <include layout="@layout/strategy_comment_button"/>
+                <!--里面有两个按钮，onclick中写了像个function可以用的，对应的function写在mainActivity就好-->
             </LinearLayout>
         </LinearLayout>
 

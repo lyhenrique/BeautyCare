@@ -20,11 +20,11 @@ import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.beautycare.R;
-import com.beautycare.makeup.MakeupData;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.beautycare.makeup.MakeupData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,19 +74,6 @@ public class SearchFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_search, container,
                 false);
 
-        /*
-        listAll.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                //Toast.makeText(getActivity(), ((TextView) view).findViewById(R.id.name).toString(), Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(getActivity(), makeupDetails.class);
-                startActivity(intent);
-
-            }
-        });
-        */
         return view;
     }
 
@@ -217,7 +204,6 @@ public class SearchFragment extends Fragment {
         }
         @Override
         protected void onPostExecute(ArrayList<MakeupData> dataList){
-            int a[];
             mContext=getActivity().getApplicationContext();//获取Fragement Context
             mListView = (ListView) getView().findViewById(R.id.listAll);
             initImageLoader(getActivity().getApplicationContext());
@@ -228,36 +214,32 @@ public class SearchFragment extends Fragment {
             ListViewItem listViewItem = null;
             // if flag = 1 SearchFragment flag = 2 CollectFragment
             for (int i = 0; i < dataList.size(); i++) {
-                listViewItem = new ListViewItem("No." + i, dataList.get(i).getMakeup_name(), dataList.get(i).getBrand(), dataList.get(i).getImages().get(0).getImage_url(), R.drawable.good_icon, 1, String.valueOf(dataList.get(i).getLike()));
+                listViewItem = new ListViewItem("No." + i,
+                        dataList.get(i).getCategory(),
+                        dataList.get(i).getMakeup_name(),
+                        dataList.get(i).getBrand(),
+                        dataList.get(i).getMakeup_content(),
+                        dataList.get(i).getBrand_content(),
+                        dataList.get(i).getMark(),
+                        dataList.get(i).getPrice(),
+                        dataList.get(i).getLocation().get(0),
+                        dataList.get(i).getLocation().get(1),
+                        dataList.get(i).getLocation().get(2),
+                        dataList.get(i).getImages().get(0).getImage_url(),
+                        dataList.get(i).getImages().get(1).getImage_url(),
+                        dataList.get(i).getImages().get(2).getImage_url(),
+                        dataList.get(i).getImages().get(0).getImage_content(),
+                        dataList.get(i).getImages().get(1).getImage_content(),
+                        dataList.get(i).getImages().get(2).getImage_content(),
+                        R.drawable.good_icon, 1, String.valueOf(dataList.get(i).getLike()));
                 arrayList.add(listViewItem);
             }
-          /*
-                if (arrayList.size() == 0) {
-                    arrayList.add(listViewItem);
-                }
-                else {
-                    for (int u = 0; u < arrayList.size(); u++) {
-                        if (dataList.get(i).getLike() > Integer.parseInt(arrayList.get(u).getLike()))
-                        {
-                            arrayList.add(u,listViewItem);
-                            break;
-                        }
-                        else {
-                            arrayList.add(listViewItem);
-                             }
-                        }
-                      }
-                }
-            for (int i = 0; i < arrayList.size(); i++)
-            {
-                int u =i+1;
-                arrayList.get(i).setNum("No." + u);
-            }
-            */
             ListViewAdapter adapter = new ListViewAdapter(arrayList,mContext,mImageLoader);
             mListView.setAdapter(adapter);
-
         }
+
+
+
         @Override
         protected void onPreExecute() {
 
