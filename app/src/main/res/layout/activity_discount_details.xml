@@ -28,9 +28,10 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:text="Sales"
+            android:gravity="center"
             android:layout_below="@+id/discount_slider"
             android:textSize="20sp"
-            android:textColor="#000000"/>
+            android:textColor="@color/colorAccent"/>
 
         <TextView
             android:id="@+id/tv_detail_content"
@@ -40,6 +41,7 @@
             android:layout_marginTop="7dp"
             android:text="contents"
             android:textSize="16sp"
+            android:gravity="fill_vertical"
             android:textColor="#000000"/>
 
         <Button
