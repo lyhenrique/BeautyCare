@@ -74,7 +74,6 @@ public class StrategyAdapter extends BaseAdapter {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.strategy_item_style, null);
-            //viewHolder.imageView = (ImageView) convertView.findViewById(R.id.ItemImage);
             viewHolder.title = (TextView) convertView.findViewById(R.id.name);
             viewHolder.content = (TextView) convertView.findViewById(R.id.brand);
             viewHolder.more = (TextView) convertView.findViewById(R.id.more);
@@ -88,7 +87,6 @@ public class StrategyAdapter extends BaseAdapter {
         }
 
         StrategyData bean = mList.get(position);
-        //viewHolder.imageView.setImageResource(bean.getIconID());
         viewHolder.title.setText(bean.getItemTitle());
         viewHolder.content.setText(bean.getItemAbstract());
         viewHolder.more.setText(bean.getMore());

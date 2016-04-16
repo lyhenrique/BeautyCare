@@ -13,7 +13,6 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -29,7 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StrategyDetails extends AppCompatActivity {
-    ImageView item_image;
     TextView strategyTitle;
     TextView mark;
     RatingBar rating;
@@ -41,13 +39,6 @@ public class StrategyDetails extends AppCompatActivity {
     String item_abstract;
     String item_details;
     String item_video;
-
-    int item_mark;
-    int item_like;
-
-    String url1;
-    String url2;
-    String url3;
 
     //video
     private static final String LOGTAG = "video";
@@ -96,16 +87,6 @@ public class StrategyDetails extends AppCompatActivity {
         item_details = bundle.getString("strategyDetails");
         item_video = bundle.getString("strategyVideo");
 
-        //   item_like = bundle.getInt("like");
-        //   item_mark = bundle.getInt("mark");
-
-        //   url1 = bundle.getString("url1");
-        //   url2 = bundle.getString("url2");
-        //   url3 = bundle.getString("url3");
-
-        //item image
-
-
         //item name
         setTitle(item_title);
 
@@ -115,11 +96,6 @@ public class StrategyDetails extends AppCompatActivity {
 
         webView.loadUrl(item_video);
 
-        //mark and RatingBar
-        //   mark.setText(item_mark);
-        //    rating.setMax(5);
-        //    String item_mark = mark.getText().toString();
-        //    rating.setRating(Float.parseFloat(item_mark));
     }
 
     //返回键

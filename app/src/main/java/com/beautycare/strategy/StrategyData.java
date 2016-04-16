@@ -19,7 +19,7 @@ public class StrategyData {
     private String more;
     private int iconSpread;
     private int iconShrink_up;
-    //private ArrayList<MakeupImage>images = new ArrayList<MakeupImage>();
+
 
 
     //set methods
@@ -30,7 +30,6 @@ public class StrategyData {
     public void setItemDetails(String itemDetails){ this.itemDetails = itemDetails;}
     public void setItemVideo(String itemVideo){this.itemVideo = itemVideo;}
     public void setMark(int mark){this.mark = mark; }
-    //public void setImages(String image_url, String image_content){this.images.add(new MakeupImage(image_url,image_content)); }
     public void setLike(int like){this.like = like;}
 
     public void setFlipper(String flipper){this.flipper.add(flipper); }
@@ -47,7 +46,6 @@ public class StrategyData {
     public String getItemDetails(){return itemDetails;}
     public String getItemVideo(){return itemVideo;}
     public int getMark(){return mark;}
-    //public ArrayList<MakeupImage> getImages(){return images;}
     public int getLike(){return like;}
 
 

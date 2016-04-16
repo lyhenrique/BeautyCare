@@ -25,19 +25,10 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
-import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder;
-import cn.bingoogolapple.refreshlayout.BGAStickinessRefreshViewHolder;
+public class StrategyGentlemen extends Fragment  {
 
-/**
- * Created by ShenLing on 2016/3/8.
- */
-public class StrategyGentlemen extends Fragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
-    private ArrayList<StrategyItems> itemlist ;
-    private BGARefreshLayout mRefreshLayout;
     private ImageLoader mImageLoader;
     private  ListView listAll;
-    //private  int[] images = {R.drawable.show_1, R.drawable.show_2,R.drawable.show_3,R.drawable.show_4};
 
     @Override
     public void onAttach(Activity activity) {
@@ -48,10 +39,6 @@ public class StrategyGentlemen extends Fragment implements BGARefreshLayout.BGAR
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /*itemlist = new ArrayList<StrategyItems>();
-        for (int i = 0; i < 10; i++) {
-            itemlist.add(new StrategyItems(images, "Gentlemen Item " + i , R.string.text_info, "Detail Page", R.drawable.spread, R.drawable.shrink_up));
-        }*/
         initImageLoader(getActivity());
     }
 
@@ -60,143 +47,11 @@ public class StrategyGentlemen extends Fragment implements BGARefreshLayout.BGAR
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.strategy_gentlemen,container,false);
 
-        /*ListView listAll = (ListView)view.findViewById(R.id.listAll);
-
-        mRefreshLayout = (BGARefreshLayout) view.findViewById(R.id.rl_modulename_refresh);
-        // initRefreshLayout(mRefreshLayout);
-
-        StrategyAdapter adapter = new StrategyAdapter(getActivity(),itemlist);
-        listAll.setAdapter(adapter);
-
-        /*listAll.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), StrategyDetails.class);
-                startActivity(intent);
-            }
-        });*/
         initImageLoader(getActivity());
 
         return view;
     }
 
-    private void initRefreshLayout(BGARefreshLayout mRefreshLayout) {
-        // 为BGARefreshLayout设置代理
-        mRefreshLayout.setDelegate(this);
-
-        // 设置下拉刷新和上拉加载更多的风格     参数1：应用程序上下文，参数2：是否具有上拉加载更多功能
-        BGARefreshViewHolder refreshViewHolder = new BGAStickinessRefreshViewHolder(getActivity(),true);
-
-        refreshViewHolder.setLoadingMoreText("Loading More");
-        refreshViewHolder.setLoadMoreBackgroundColorRes(R.color.gray);
-        refreshViewHolder.setRefreshViewBackgroundColorRes(R.color.gray);
-
-        // 设置下拉刷新和上拉加载更多的风格
-        mRefreshLayout.setRefreshViewHolder(refreshViewHolder);
-    }
-    /*@Override
-    public void onBGARefreshLayoutBeginRefreshing() {
-
-        new AsyncTask<Void, Void, Void>() {
-
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                //getData(itemlist,"Refresh","refresh brand");
-                for(int i = 0; i < 5; i++) {
-                    itemlist.add(0, new StrategyItems(images, "Refresh Item " + i, R.string.text_info, "Detail Page", R.drawable.spread, R.drawable.shrink_up));
-                    mRefreshLayout.endRefreshing();
-                }
-            }
-        }.execute();
-
-    }
-
-    @Override
-    public void onBGARefreshLayoutBeginLoadingMore() {
-        new AsyncTask<Void, Void, Void>() {
-
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                for(int i = 0; i < 5; i++) {
-                    itemlist.add(new StrategyItems(images, "Load Item " + i, R.string.text_info, "Detail Page", R.drawable.spread, R.drawable.shrink_up));
-                    mRefreshLayout.endRefreshing();
-                }
-                mRefreshLayout.endRefreshing();
-
-            }
-        }.execute();
-    }
-*/
-
-    @Override
-    public void onBGARefreshLayoutBeginRefreshing() {
-
-        new AsyncTask<Void, Void, Void>() {
-
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                //getData(itemlist,"Refresh","refresh brand");
-                for(int i = 0; i < 5; i++) {
-                    //itemlist.add(0, new MakeupItems("Refresh item "+i, "Refresh brand "+i, R.drawable.new_arrival_5));
-                    //mRefreshLayout.endRefreshing();
-                }
-            }
-        }.execute();
-
-
-    }
-
-    @Override
-    public void onBGARefreshLayoutBeginLoadingMore() {
-        new AsyncTask<Void, Void, Void>() {
-
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-
-
-            }
-        }.execute();
-    }
 
 
 
@@ -209,31 +64,6 @@ public class StrategyGentlemen extends Fragment implements BGARefreshLayout.BGAR
         new strategy_all_readdata().execute();
     }
 
-   /* @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-*/
 
     //ImageLoader
     public static void initImageLoader(Context context) {
