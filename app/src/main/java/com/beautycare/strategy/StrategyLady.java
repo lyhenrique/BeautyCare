@@ -25,7 +25,6 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class StrategyLady extends Fragment  {
 
     private ImageLoader mImageLoader;
