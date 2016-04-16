@@ -46,8 +46,11 @@ public class ListViewAdapter extends BaseAdapter {
     int flag;
     List  ss = new ArrayList();
 
+    private Context c;
+
     public ListViewAdapter(ArrayList<ListViewItem> arrayList, Context context, ImageLoader imageLoader) {
         super();
+        c=context;
         this.mArrayList = arrayList;
         flag =arrayList.get(0).getFlag() ;
         this.mContext = context;
@@ -441,6 +444,8 @@ public class ListViewAdapter extends BaseAdapter {
                                     DialogInterface dialoginterface, int i) {
                                 load_s(MakeupName);
                                 save();
+                                Intent intent = new Intent(c,FirstActivity.class);
+                                c.startActivity(intent);
                             }
                         })
                 .setNegativeButton("No",null)
