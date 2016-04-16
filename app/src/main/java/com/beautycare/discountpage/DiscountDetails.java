@@ -1,6 +1,7 @@
 package com.beautycare.discountpage;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -67,6 +68,9 @@ public class DiscountDetails extends AppCompatActivity implements BaseSliderView
         Log.e("Name", mDiscountName);
 
         initView();
+        //Title type
+        Typeface fontFace = Typeface.createFromAsset(getAssets(),"fonts/segoe print.ttf");
+        title_detail.setTypeface(fontFace);
 
         mDataReader.execute(mDiscountName);
 
