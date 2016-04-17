@@ -27,7 +27,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class DiscountDetails extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener,onDiscountDataCompleted {
 
@@ -138,7 +138,7 @@ public class DiscountDetails extends AppCompatActivity implements BaseSliderView
     }
 
     private void readImg() {
-        HashMap<String,String> url_banners = new HashMap<>();
+        LinkedHashMap<String,String> url_banners = new LinkedHashMap<>();
         url_banners.put(mDetail.getBANNER_1_NAME(), mDetail.getBANNER_1());
         url_banners.put(mDetail.getBANNER_2_NAME(), mDetail.getBANNER_2());
         Log.e("Name", mDetail.getBANNER_1());
