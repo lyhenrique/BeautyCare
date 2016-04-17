@@ -20,6 +20,7 @@ import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.beautycare.R;
+import com.beautycare.makeup.MakeupAdapter;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -202,9 +203,10 @@ public class SearchFragment extends Fragment {
             }
             return read;
         }
+
         @Override
         protected void onPostExecute(ArrayList<MakeupData> dataList){
-            mContext=getActivity().getApplicationContext();//获取Fragement Context
+            mContext=getActivity();//获取Fragement Context
             mListView = (ListView) getView().findViewById(R.id.listAll);
             initImageLoader(getActivity().getApplicationContext());
             mImageLoader= ImageLoader.getInstance();

@@ -91,28 +91,18 @@ public class CollectFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mContext = this.getActivity();//获取Fragement Context
+        delete_file_1();
         load_s();
         new rank().execute();
     }
 
     @Override
     public void onStart() {
-        super.onResume();
+        super.onStart();
         load_s2();//delete function
         load(); //add function
         new rank().execute();
-    }
-
-        @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden) {
-        }
+        save();
     }
 
 
@@ -138,6 +128,15 @@ public class CollectFragment extends Fragment {
         if (mImageLoader!=null) {
             mImageLoader.clearMemoryCache();
             mImageLoader.clearDiscCache();
+        }
+    }
+
+    public void delete_file_1(){
+        File sdCard = Environment.getExternalStorageDirectory();
+        File directory = new File (sdCard.getAbsoluteFile() + "/MyFiles");
+        File file = new File(directory, "textfile.txt");
+        if(file.isFile()){
+            file.delete();
         }
     }
 
