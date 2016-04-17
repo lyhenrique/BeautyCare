@@ -3,7 +3,6 @@ package com.beautycare.discountpage;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -16,7 +15,6 @@ import com.beautycare.R;
 import com.beautycare.discountpage.adapter.ItemBean;
 import com.beautycare.discountpage.utils.DiscountDataUtils;
 import com.beautycare.discountpage.utils.onDiscountDataCompleted;
-import com.beautycare.discountpage.widget.ImageLoadingDialog;
 import com.beautycare.mall.MallDetail;
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
@@ -100,16 +98,6 @@ public class DiscountDetails extends AppCompatActivity implements BaseSliderView
 
     @Override
     public void onSecondDataDone(ArrayList<ItemBean> secondList) {
-
-        final ImageLoadingDialog dialog = new ImageLoadingDialog(this);
-        dialog.show();
-        // 两秒后关闭后dialog
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                dialog.dismiss();
-            }
-        }, 1000 * 2);
 
         if(secondList.size() != 0) {
             mDetail.setTitle(secondList.get(0).getTitle());
