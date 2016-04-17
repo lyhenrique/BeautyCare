@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -279,5 +280,15 @@ public class FirstActivity extends FragmentActivity {
     }
 
 
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        switch (keyCode)
+        {
+            case KeyEvent.KEYCODE_BACK:
+                System.exit(0);
+                break;
+        }
+        return super.onKeyUp(keyCode,event);
+    }
 
 }
