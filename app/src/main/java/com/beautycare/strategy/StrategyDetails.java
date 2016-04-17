@@ -58,7 +58,6 @@ public class StrategyDetails extends AppCompatActivity {
 
 
         //webview
-
         webView = (WebView) findViewById(R.id.webView);
         // 设置WebView属性，能够执行Javascript脚本
         webView.getSettings().setJavaScriptEnabled(true);
@@ -69,6 +68,7 @@ public class StrategyDetails extends AppCompatActivity {
         webView.getSettings().setUseWideViewPort(true);
         webView.setWebChromeClient(new WebChromeClient());
 
+        //Override loadurl, enable to start video in the current window
         webView.setWebViewClient(new WebViewClient() {
 
             @Override
@@ -81,19 +81,21 @@ public class StrategyDetails extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//返回键
 
+        //get data from last page
         Bundle bundle = getIntent().getExtras();
         item_title = bundle.getString("strategyTitle");
         item_abstract = bundle.getString("strategyAbstract");
         item_details = bundle.getString("strategyDetails");
         item_video = bundle.getString("strategyVideo");
 
-        //item name
-        setTitle(item_title);
+        //page name
+        setTitle("Item Information");
 
         strategyTitle.setText(item_title);
         strategyAbstract.setText(item_abstract);
         strategyDetail.setText(item_details);
 
+        //load video url
         webView.loadUrl(item_video);
 
     }
@@ -110,14 +112,14 @@ public class StrategyDetails extends AppCompatActivity {
 
 
 
-
+    //写评论
     public void WriteComment(View view){
-        Intent intent = new Intent(StrategyDetails.this,com.beautycare.makeup.comment.class);
+        Intent intent = new Intent(StrategyDetails.this,com.beautycare.makeup.comment.class); // StrategyDetails turn to comment(in makeup)
         Bundle bundle = new Bundle();
-        bundle.putString("merchantName","StrategyProductName");
-        bundle.putString("category","Strategy");
+        bundle.putString("merchantName",item_title); // merchantName is item title in comment in leancloud
+        bundle.putString("category","Strategy"); // category in leancloud
         intent.putExtras(bundle);
-        startActivity(intent);
+        startActivity(intent); // start
     }
 
     //查看评论的，执行了showComments()这个asynctask

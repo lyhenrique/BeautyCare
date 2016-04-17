@@ -84,15 +84,16 @@ public class StrategyAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        StrategyData bean = mList.get(position);
+        StrategyData bean = mList.get(position); // read data into bean
+        // set content into every part in the itemview
         viewHolder.title.setText(bean.getItemTitle());
         viewHolder.content.setText(bean.getItemAbstract());
         viewHolder.more.setText(bean.getMore());
-        viewHolder.spread.setImageResource(bean.getIconSpread());
-        viewHolder.shrink_up.setImageResource(bean.getIconShrink_up());
+        viewHolder.spread.setImageResource(bean.getIconSpread());//弹开箭头
+        viewHolder.shrink_up.setImageResource(bean.getIconShrink_up());//收起箭头
 
+        // get flipper image 图片轮播
         flipper = bean.getFlipper();
-
         for (int i = 0; i < flipper.size(); i++) {
             ImageView iv = new ImageView(c);
 
@@ -103,8 +104,9 @@ public class StrategyAdapter extends BaseAdapter {
         }
 
         viewHolder.viewFlipper.setAutoStart(true);
-        viewHolder.viewFlipper.setFlipInterval(3000);
+        viewHolder.viewFlipper.setFlipInterval(3000); // interval time 时间间隔
         viewHolder.viewFlipper.startFlipping();
+        // get flipper image 图片轮播
 
         final String category = bean.getCategory();
         final String strategyTitle = bean.getItemTitle();
@@ -188,13 +190,13 @@ public class StrategyAdapter extends BaseAdapter {
                 // TODO Auto-generated method stub
                 switch (v.getId()) {
                     case R.id.brand: {
-                        if (mState == SPREAD_STATE) {
+                        if (mState == SPREAD_STATE) { //弹开变收起
                             viewHolder.content.setMaxLines(VIDEO_CONTENT_DESC_MAX_LINE);
                             viewHolder.content.requestLayout();
                             viewHolder.shrink_up.setVisibility(View.GONE);
                             viewHolder.spread.setVisibility(View.VISIBLE);
                             mState = SHRINK_UP_STATE;
-                        } else if (mState == SHRINK_UP_STATE) {
+                        } else if (mState == SHRINK_UP_STATE) { //收起变弹开
                             viewHolder.content.setMaxLines(Integer.MAX_VALUE);
                             viewHolder.content.requestLayout();
                             viewHolder.shrink_up.setVisibility(View.VISIBLE);
@@ -216,13 +218,13 @@ public class StrategyAdapter extends BaseAdapter {
                 // TODO Auto-generated method stub
                 switch (v.getId()) {
                     case R.id.more: {
-                        if (mState == SPREAD_STATE) {
+                        if (mState == SPREAD_STATE) { //弹开变收起
                             viewHolder.content.setMaxLines(VIDEO_CONTENT_DESC_MAX_LINE);
                             viewHolder.content.requestLayout();
                             viewHolder.shrink_up.setVisibility(View.GONE);
                             viewHolder.spread.setVisibility(View.VISIBLE);
                             mState = SHRINK_UP_STATE;
-                        } else if (mState == SHRINK_UP_STATE) {
+                        } else if (mState == SHRINK_UP_STATE) { //收起变弹开
                             viewHolder.content.setMaxLines(Integer.MAX_VALUE);
                             viewHolder.content.requestLayout();
                             viewHolder.shrink_up.setVisibility(View.VISIBLE);
@@ -242,7 +244,6 @@ public class StrategyAdapter extends BaseAdapter {
     }
 
     class ViewHolder {
-        //public ImageView imageView;
         public TextView title;
         public TextView content;
         public TextView more;

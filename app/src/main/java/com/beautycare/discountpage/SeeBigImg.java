@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.beautycare.R;
 import com.beautycare.discountpage.widget.ImageLoadingDialog;
@@ -23,6 +24,7 @@ public class SeeBigImg extends AppCompatActivity {
         setContentView(R.layout.activity_see_big_img);
         //显示系统Actionbar的返回按钮
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle("Details");
 
         options = new DisplayImageOptions.Builder()
                 .showStubImage(R.drawable.ic_stub)
@@ -34,6 +36,7 @@ public class SeeBigImg extends AppCompatActivity {
                 .build();
         img = (PhotoView)findViewById(R.id.img);
         img.enable();
+        setClickListener();
 //        Info info = img.getInfo();
 // 从一张图片信息变化到现在的图片，用于图片点击后放大浏览，具体使用可以参照demo的使用
 //        img.animaFrom(info);
@@ -49,7 +52,7 @@ public class SeeBigImg extends AppCompatActivity {
             public void run() {
                 dialog.dismiss();
             }
-        }, 1000 * 2);
+        }, 1500);
     }
 
     //菜单返回上一页
@@ -61,5 +64,14 @@ public class SeeBigImg extends AppCompatActivity {
                 return true;
         }
         return false;
+    }
+
+    public void setClickListener() {
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }

@@ -43,7 +43,7 @@ public class MallMainRecyAdapter extends RecyclerView.Adapter<MallMainRecyAdapte
       //          .showImageOnLoading(R.drawable.ic_stub)             dsc
                 .showStubImage(R.drawable.ic_stub)
                 .showImageForEmptyUri(R.drawable.ic_empty)
-                .showImageOnFail(R.drawable.ic_error)
+//                .showImageOnFail(R.drawable.ic_error)
                 .cacheInMemory()
                 .cacheOnDisc()
        //         .cacheOnDisk()              dsc
