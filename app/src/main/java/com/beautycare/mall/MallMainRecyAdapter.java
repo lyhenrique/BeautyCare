@@ -1,6 +1,7 @@
 package com.beautycare.mall;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,10 +26,7 @@ public class MallMainRecyAdapter extends RecyclerView.Adapter<MallMainRecyAdapte
         implements View.OnClickListener {
     private final LayoutInflater mLayoutInflater;
     private final Context mContext;
-//    private String[] mTitles;
     private DisplayImageOptions options;
-//    private AVObject getObject;
-//    private Data data;
     private mallListListener mallOnItemClickListner;
     private ArrayList<MallData> mallDataList;
 
@@ -45,7 +43,7 @@ public class MallMainRecyAdapter extends RecyclerView.Adapter<MallMainRecyAdapte
       //          .showImageOnLoading(R.drawable.ic_stub)             dsc
                 .showStubImage(R.drawable.ic_stub)
                 .showImageForEmptyUri(R.drawable.ic_empty)
-                .showImageOnFail(R.drawable.ic_error)
+//                .showImageOnFail(R.drawable.ic_error)
                 .cacheInMemory()
                 .cacheOnDisc()
        //         .cacheOnDisk()              dsc
@@ -67,8 +65,6 @@ public class MallMainRecyAdapter extends RecyclerView.Adapter<MallMainRecyAdapte
         View v = mLayoutInflater.inflate(R.layout.mall_list_card_item, parent, false);
         v.setOnClickListener(this);
         ViewHolder viewHolder = new ViewHolder(v);
-//        v.setOnClickListener(this);
-//        return new ViewHolder(mLayoutInflater.inflate(R.layout.mall_list_card_item, parent, false));
 
         return viewHolder;
     }
@@ -76,6 +72,8 @@ public class MallMainRecyAdapter extends RecyclerView.Adapter<MallMainRecyAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
+        Typeface customFont = Typeface.createFromAsset(mContext.getAssets(), "fonts/segoe print.ttf");
+        holder.mTextView.setTypeface(customFont);
         holder.mTextView.setText(/*mTitles[position]*/mallDataList.get(position).getMallName());
         Log.d("title", mallDataList.get(0).getMallName());
         ImageLoader.getInstance().displayImage(mallDataList.get(position).getMallLogoURL(), holder.mImageView, options);
@@ -83,10 +81,6 @@ public class MallMainRecyAdapter extends RecyclerView.Adapter<MallMainRecyAdapte
         holder.itemView.setTag(mallDataList.get(position));
     }
 
-//    @Override
-//    public int getItemViewType(int position) {
-//        return position % 2 == 0 ? ITEM_TYPE.ITEM_TYPE_IMAGE.ordinal() : ITEM_TYPE.ITEM_TYPE_TEXT.ordinal();
-//    }
 
     @Override
     public int getItemCount() {

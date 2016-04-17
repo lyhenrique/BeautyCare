@@ -3,7 +3,6 @@ package com.beautycare.discountpage;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -16,7 +15,6 @@ import com.beautycare.R;
 import com.beautycare.discountpage.adapter.ItemBean;
 import com.beautycare.discountpage.utils.DiscountDataUtils;
 import com.beautycare.discountpage.utils.onDiscountDataCompleted;
-import com.beautycare.discountpage.widget.ImageLoadingDialog;
 import com.beautycare.mall.MallDetail;
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
@@ -27,7 +25,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class DiscountDetails extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener,onDiscountDataCompleted {
 
@@ -55,7 +53,7 @@ public class DiscountDetails extends AppCompatActivity implements BaseSliderView
         options = new DisplayImageOptions.Builder()
                 .showStubImage(R.drawable.ic_stub)
                 .showImageForEmptyUri(R.drawable.ic_empty)
-                .showImageOnFail(R.drawable.ic_error)
+//                .showImageOnFail(R.drawable.ic_error)
                 .cacheInMemory()
                 .cacheOnDisc()
                 .imageScaleType(ImageScaleType.EXACTLY)
@@ -101,16 +99,6 @@ public class DiscountDetails extends AppCompatActivity implements BaseSliderView
     @Override
     public void onSecondDataDone(ArrayList<ItemBean> secondList) {
 
-        final ImageLoadingDialog dialog = new ImageLoadingDialog(this);
-        dialog.show();
-        // 两秒后关闭后dialog
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                dialog.dismiss();
-            }
-        }, 1000 * 2);
-
         if(secondList.size() != 0) {
             mDetail.setTitle(secondList.get(0).getTitle());
             mDetail.setContent(secondList.get(0).getContent());
@@ -138,7 +126,7 @@ public class DiscountDetails extends AppCompatActivity implements BaseSliderView
     }
 
     private void readImg() {
-        HashMap<String,String> url_banners = new HashMap<>();
+        LinkedHashMap<String,String> url_banners = new LinkedHashMap<>();
         url_banners.put(mDetail.getBANNER_1_NAME(), mDetail.getBANNER_1());
         url_banners.put(mDetail.getBANNER_2_NAME(), mDetail.getBANNER_2());
         Log.e("Name", mDetail.getBANNER_1());

@@ -2,7 +2,6 @@ package com.beautycare.mall;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,13 +33,11 @@ public class MallExpandaleListAdapter extends BaseExpandableListAdapter {
         this.floorListHeader = listHeader;
         this.ShopListData = listChildData;
         options = new DisplayImageOptions.Builder()
-//                .showImageOnLoading(R.drawable.ic_stub)
                 .showStubImage(R.drawable.ic_stub)
                 .showImageForEmptyUri(R.drawable.ic_empty)
-                .showImageOnFail(R.drawable.ic_error)
+//                .showImageOnFail(R.drawable.ic_error)
                 .cacheInMemory()
                 .cacheOnDisc()
-//                .cacheOnDisk(true)
                 .imageScaleType(ImageScaleType.EXACTLY)
                 .build();
 
@@ -95,7 +92,7 @@ public class MallExpandaleListAdapter extends BaseExpandableListAdapter {
         TextView mallFloorName = (TextView) convertView.findViewById(R.id.mall_floor_name_header);
         Typeface customFont = Typeface.createFromAsset(tmpContext.getAssets(), "fonts/segoe print.ttf");
         mallFloorName.setTypeface(customFont);
-        Log.d("testTextView", mallFloorName.toString());
+//        Log.d("testTextView", mallFloorName.toString());
         mallFloorName.setText(floorName);
 
         return convertView;
@@ -112,11 +109,9 @@ public class MallExpandaleListAdapter extends BaseExpandableListAdapter {
 
         String url = (String) getChild(groupPosition, childPosition);
 
-//        TextView shopName = (TextView) convertView.findViewById(R.id.mall_shop_name);
         ImageView shopLogo = (ImageView) convertView.findViewById(R.id.mall_shop_logo);
 
         ImageLoader.getInstance().displayImage(url, shopLogo, options);
-//        shopName.setText("testShop");
 
         return convertView;
     }

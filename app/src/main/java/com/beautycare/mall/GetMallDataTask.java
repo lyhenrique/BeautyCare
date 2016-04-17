@@ -130,55 +130,8 @@ public class GetMallDataTask extends AsyncTask<String, Void, ArrayList<MallData>
         return tmplist;
     }
 
-    //        @Override
-//        protected void onPreExecute() {
-//
-//            /*这个是AsyncTask最开始的动作，这里我们可以初始化一些东西，比如说这个很重要的云数据需要初始，
-//            * 下面两个很奇怪的参数我自己账户中建了一个应用，然后就会提供应用的id和key,如果大家想试的话，
-//            * 我把我的账号密码给你们，暂时不知道能不能同时登，
-//            * 账号：maskliang@gmail.com
-//            * 密码：fgh159456IOP*/
-//            AVOSCloud.initialize(MallActivity.this, "lpjA6quucO5BzlmMPxTrjKwD-gzGzoHsz", "vu6uDC74NlzzJP4YbrJmDFV6");
-//            mallRecyList = (RecyclerView) findViewById(R.id.mall_list_main);
-//
-//        }
-
     @Override
     protected void onPostExecute(ArrayList<MallData> tmpdatalist) {
-        //这个方法的参数是在doInBackground传过来的，是AsyncTask处理获取结果的方法
-
-//        mallDataList = tmpdatalist;
-//        Log.d("size", String.valueOf(mallDataList.size()));
-//            /*这里就新建adapter并把参数传给adapter初始化,因为我和刘生的adapter类似，所以不知道申申和主任的
-//            * adapter是怎么写的，不知道你们是怎么传参，所以这里也只能给你们参考*/
-//        this.getClass().mallMainRecyAdapter = new MallMainRecyAdapter(this.getClass() , mallDataList);
-//
-//        mallRecyList.setLayoutManager(new LinearLayoutManager(MallActivity.this));
-//
-//        mallRecyList.setAdapter(mallMainRecyAdapter);
-//
-//        mallMainRecyAdapter.setOnItemClickListener(new MallMainRecyAdapter.mallListListener() {
-//            @Override
-//            public void onItemClick(View v, MallData tmpdata) {
-//
-//                Intent intent = new Intent(MallActivity.this, MallDetail.class);
-//                Bundle bundle = new Bundle();
-//                bundle.putString("url", tmpdata.getMallURL());
-//                bundle.putString("content", tmpdata.getMallContent());
-//                bundle.putString("name", tmpdata.getMallName());
-////                    LatLng latLng = tmpdata.getLatLng();
-////                    System.out.println(latLng.toString());
-//                bundle.putParcelable("latlng", tmpdata.getLatLng());
-//                intent.putExtras(bundle);
-//                startActivity(intent);
-//
-//            }
-//        });
-//
-//            /*还有一点我还没照着刘生的onClickListner做好响应的动作，然而点击相应要传参进去第二层页面，
-//            * 这个还需要研究*/
-//
-//        Log.d("boolean", mallMainRecyAdapter.toString());
 
         taskCompleted.processFinish(tmpdatalist);
 

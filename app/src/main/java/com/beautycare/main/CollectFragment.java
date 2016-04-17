@@ -152,6 +152,8 @@ public class CollectFragment extends Fragment {
         if(file2.isFile()){
             file2.delete();
         }
+
+
     }
 
     public void save(){
