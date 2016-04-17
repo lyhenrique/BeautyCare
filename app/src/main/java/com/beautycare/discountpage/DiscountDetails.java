@@ -55,7 +55,7 @@ public class DiscountDetails extends AppCompatActivity implements BaseSliderView
         options = new DisplayImageOptions.Builder()
                 .showStubImage(R.drawable.ic_stub)
                 .showImageForEmptyUri(R.drawable.ic_empty)
-                .showImageOnFail(R.drawable.ic_error)
+//                .showImageOnFail(R.drawable.ic_error)
                 .cacheInMemory()
                 .cacheOnDisc()
                 .imageScaleType(ImageScaleType.EXACTLY)
