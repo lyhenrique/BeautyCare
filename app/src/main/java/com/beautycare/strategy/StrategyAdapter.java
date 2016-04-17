@@ -108,7 +108,6 @@ public class StrategyAdapter extends BaseAdapter {
         viewHolder.viewFlipper.startFlipping();
         // get flipper image 图片轮播
 
-
         final String category = bean.getCategory();
         final String strategyTitle = bean.getItemTitle();
         final String strategyAbstract = bean.getItemAbstract();
