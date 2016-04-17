@@ -77,8 +77,6 @@ public class MakeupDetails extends AppCompatActivity implements BaseSliderView.O
     String img_content2;
     String img_content3;
 
-    String clickLocation;
-
     ArrayList<commentItems> comments = new ArrayList<commentItems>();
 
     @Override
@@ -86,7 +84,6 @@ public class MakeupDetails extends AppCompatActivity implements BaseSliderView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_makeup_details);
 
-        //makeupImage = (ImageView) findViewById(R.id.makeupImage);
         makeupName = (TextView) findViewById(R.id.makeupName);
         price = (TextView) findViewById(R.id.price);
         mark = (TextView) findViewById(R.id.mark);
@@ -189,9 +186,6 @@ public class MakeupDetails extends AppCompatActivity implements BaseSliderView.O
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(MakeupDetails.this,loc.get(position).toString(), Toast.LENGTH_SHORT).show();
 
-//                clickLocation = loc.get(position).toString();
-//
-//                new MyTask().execute();
                 Intent intent = new Intent(MakeupDetails.this,MallDetail.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("MallName",loc.get(position).toString());
@@ -199,18 +193,6 @@ public class MakeupDetails extends AppCompatActivity implements BaseSliderView.O
                 startActivity(intent);
             }
         });
-
-        //comment listview
-//        for(int i = 0 ; i < 5; i++){
-//            commentItems com = new commentItems("test user"+i,"29/03/2016","Mark: "+"5.0","rather good merchant");
-//            comments.add(com);
-//
-//        }
-//        commentAdapter comAdapter = new commentAdapter(this, comments);
-//        comment.setAdapter(comAdapter);
-//        Utility.setListViewHeightBasedOnChildren(comment);
-//        comment = (ListView) findViewById(R.id.commentList);
-//        new commentListShow().execute();
 
     }
 

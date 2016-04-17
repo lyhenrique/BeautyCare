@@ -9,13 +9,6 @@ public class commentItems {
     private String commentMark;
     private String commentText;
 
-//    public commentItems(String userName, String commentTime, String commentMark, String commentText){
-//        this.userName = userName;
-//        this.commentTime = commentTime;
-//        this.commentMark = commentMark;
-//        this.commentText = commentText;
-//    }
-
     public void setUserName(String userName){this.userName = userName;}
     public void setCommentTime(String commentTime){this.commentTime = commentTime;}
     public void setCommentMark(String commentMark){this.commentMark = commentMark;}

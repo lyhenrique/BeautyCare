@@ -32,17 +32,11 @@ import cn.bingoogolapple.refreshlayout.BGAStickinessRefreshViewHolder;
 /**
  * Created by ShenLing on 2016/3/7.
  */
-public class MakeupAll extends Fragment implements BGARefreshLayout.BGARefreshLayoutDelegate{
+public class MakeupAll extends Fragment{
     private ArrayList<MakeupData> itemlist;
     private ArrayList<MakeupData> tempList = new ArrayList<MakeupData>();
     private ImageLoader mImageLoader;
     private  ListView listAll;
-
-    static int flag;
-
-    private BGARefreshLayout mRefreshLayout;
-
-    // private BGARefreshLayout.BGARefreshLayoutDelegate delegate;
 
     @Override
     public void onAttach(Activity activity) {
@@ -75,72 +69,6 @@ public class MakeupAll extends Fragment implements BGARefreshLayout.BGARefreshLa
 
         initImageLoader(getActivity());
         new makeup_all_readdata().execute();
-    }
-
-
-    private void initRefreshLayout(BGARefreshLayout mRefreshLayout) {
-
-        // 为BGARefreshLayout设置代理
-        mRefreshLayout.setDelegate(this);
-
-        // 设置下拉刷新和上拉加载更多的风格     参数1：应用程序上下文，参数2：是否具有上拉加载更多功能
-        BGARefreshViewHolder refreshViewHolder = new BGAStickinessRefreshViewHolder(getActivity(),true);
-
-        refreshViewHolder.setLoadingMoreText("Loading More");
-        refreshViewHolder.setLoadMoreBackgroundColorRes(R.color.gray);
-        refreshViewHolder.setRefreshViewBackgroundColorRes(R.color.gray);
-
-        // 设置下拉刷新和上拉加载更多的风格
-        mRefreshLayout.setRefreshViewHolder(refreshViewHolder);
-
-
-    }
-    @Override
-    public void onBGARefreshLayoutBeginRefreshing() {
-
-        new AsyncTask<Void, Void, Void>() {
-
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-
-                mRefreshLayout.endRefreshing();
-
-            }
-        }.execute();
-
-
-    }
-
-    @Override
-    public void onBGARefreshLayoutBeginLoadingMore() {
-        new AsyncTask<Void, Void, Void>() {
-
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-
-
-            }
-        }.execute();
     }
 
 

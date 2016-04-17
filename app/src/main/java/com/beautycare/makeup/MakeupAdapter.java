@@ -79,7 +79,6 @@ public class MakeupAdapter extends BaseAdapter {
             viewHolder = (ViewHolder)convertView.getTag();
         }
         MakeupData bean = mList.get(position);
-        //viewHolder.imageView.setImageResource(R.drawable.all);
         viewHolder.title.setText(bean.getMakeup_name());
         viewHolder.content.setText(bean.getBrand());
 
