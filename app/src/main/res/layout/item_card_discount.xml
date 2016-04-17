@@ -44,7 +44,7 @@
                     android:padding="5dp"
                     android:singleLine="true"
                     android:ellipsize="end"
-                    android:textColor="#000000"
+                    android:textColor="@color/colorAccent"
                     android:gravity="left"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
