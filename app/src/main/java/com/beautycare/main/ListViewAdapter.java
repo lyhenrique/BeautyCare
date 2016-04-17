@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.beautycare.R;
+import com.beautycare.makeup.MakeupData;
+import com.beautycare.makeup.MakeupImage;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
@@ -38,8 +40,9 @@ import java.util.List;
  */
 
 public class ListViewAdapter extends BaseAdapter {
-    private ArrayList<ListViewItem> mArrayList;
+    private ArrayList<MakeupData> mArrayList;
     private Context mContext;
+    private LayoutInflater mInflater;
     private ImageLoader mImageLoader;
     private DisplayImageOptions mDisplayImageOptions;
     private ImageLoadingListenerImpl mImageLoadingListenerImpl;
@@ -48,12 +51,13 @@ public class ListViewAdapter extends BaseAdapter {
 
     private Context c;
 
-    public ListViewAdapter(ArrayList<ListViewItem> arrayList, Context context, ImageLoader imageLoader) {
+    public ListViewAdapter(int flag, ArrayList<MakeupData> arrayList, Context context, ImageLoader imageLoader) {
         super();
         c=context;
         this.mArrayList = arrayList;
-        flag =arrayList.get(0).getFlag() ;
+        this.flag = flag;
         this.mContext = context;
+        mInflater = LayoutInflater.from(context);
         this.mImageLoader = imageLoader;
         int defaultImageId = R.drawable.android_normal;
         mDisplayImageOptions = new DisplayImageOptions.Builder()
@@ -91,11 +95,24 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder=null;
-        if (convertView==null) {
-            holder=new ViewHolder();
-            if(flag == 1) {
-                convertView = LayoutInflater.from(this.mContext).inflate(R.layout.item_style, null, false);
+        ViewHolder holder;
+        MakeupData bean = mArrayList.get(position);
+        final String category = bean.getCategory();
+        final String MakeupName = bean.getMakeup_name();
+        final String brand = bean.getBrand();
+        final String MakeupContent = bean.getMakeup_content();
+        final String brandContent = bean.getBrand_content();
+        final int mark = bean.getMark();
+        final int price = bean.getPrice();
+        final int like = bean.getLike();
+        final ArrayList<String>location = bean.getLocation();
+        final ArrayList<MakeupImage>images = bean.getImages();
+
+        if(flag == 1) //rank list fragment test
+        {
+            if(convertView == null){
+                holder = new ViewHolder();
+                convertView = mInflater.inflate(R.layout.item_style,null);
                 holder.textView = (TextView) convertView.findViewById(R.id.num);
                 holder.textView1 = (TextView) convertView.findViewById(R.id.brand);
                 holder.textView2 = (TextView) convertView.findViewById(R.id.name);
@@ -103,250 +120,187 @@ public class ListViewAdapter extends BaseAdapter {
                 holder.imageView = (ImageView) convertView.findViewById(R.id.ItemImage);
                 holder.imageView1 = (ImageView) convertView.findViewById(R.id.prvImage);
                 convertView.setTag(holder);
-                //onclick
-                ListViewItem bean = mArrayList.get(position);
-
-                final String category = bean.getCategory();
-                final String MakeupName = bean.getName();
-                final String brand = bean.getBrand();
-                final String MakeupContent = bean.getMakeup_content();
-                final String brandContent = bean.getBrand_content();
-                final int mark = bean.getMark();
-                final int price = bean.getPrice();
-                final int like = Integer.valueOf(bean.getLike());
-                final String location1 = bean.getLocation1();
-                final String location2 = bean.getLocation2();
-                final String location3 = bean.getLocation3();
-                final String image_url0 = bean.getImageURL0();
-                final String image_url1 = bean.getImageURL1();
-                final String image_url2 = bean.getImageURL2();
-
-                final String img_content1 = bean.getImg_content1();
-                final String img_content2 = bean.getImg_content2();
-                final String img_content3 = bean.getImg_content3();
-
-                holder.textView.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(mContext.getApplicationContext(),MakeupDetails.class);
-                        Bundle bundle = new Bundle();
-
-                        bundle.putString("category",category);
-                        bundle.putString("MakeupName",MakeupName);
-                        bundle.putString("MakeupBrand",brand);
-
-                        bundle.putString("MakeupContent",MakeupContent);
-                        bundle.putString("brandContent",brandContent);
-                        bundle.putInt("mark", mark);
-                        bundle.putInt("price", price);
-                        bundle.putInt("like", like);
-                        bundle.putString("location1", location1);
-                        bundle.putString("location2", location2);
-                        bundle.putString("location3",location3);
-                        bundle.putString("url1",image_url0);
-                        bundle.putString("url2",image_url1);
-                        bundle.putString("url3",image_url2);
-                        bundle.putString("img_content1",img_content1);
-                        bundle.putString("img_content2",img_content2);
-                        bundle.putString("img_content3",img_content3);
-
-                        intent.putExtras(bundle);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        mContext.startActivity(intent);
-                    }
-                });
-                holder.imageView.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(mContext.getApplicationContext(),MakeupDetails.class);
-                        Bundle bundle = new Bundle();
-
-                        bundle.putString("category",category);
-                        bundle.putString("MakeupName",MakeupName);
-                        bundle.putString("MakeupBrand",brand);
-
-                        bundle.putString("MakeupContent",MakeupContent);
-                        bundle.putString("brandContent",brandContent);
-                        bundle.putInt("mark", mark);
-                        bundle.putInt("price", price);
-                        bundle.putInt("like", like);
-                        bundle.putString("location1", location1);
-                        bundle.putString("location2", location2);
-                        bundle.putString("location3",location3);
-                        bundle.putString("url1",image_url0);
-                        bundle.putString("url2",image_url1);
-                        bundle.putString("url3",image_url2);
-                        bundle.putString("img_content1",img_content1);
-                        bundle.putString("img_content2",img_content2);
-                        bundle.putString("img_content3",img_content3);
-
-                        intent.putExtras(bundle);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        mContext.startActivity(intent);
-                    }
-                });
-                holder.textView1.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(mContext.getApplicationContext(),MakeupDetails.class);
-                        Bundle bundle = new Bundle();
-
-                        bundle.putString("category",category);
-                        bundle.putString("MakeupName",MakeupName);
-                        bundle.putString("MakeupBrand",brand);
-
-                        bundle.putString("MakeupContent",MakeupContent);
-                        bundle.putString("brandContent",brandContent);
-                        bundle.putInt("mark", mark);
-                        bundle.putInt("price", price);
-                        bundle.putInt("like", like);
-                        bundle.putString("location1", location1);
-                        bundle.putString("location2", location2);
-                        bundle.putString("location3",location3);
-                        bundle.putString("url1",image_url0);
-                        bundle.putString("url2",image_url1);
-                        bundle.putString("url3",image_url2);
-                        bundle.putString("img_content1",img_content1);
-                        bundle.putString("img_content2",img_content2);
-                        bundle.putString("img_content3",img_content3);
-
-                        intent.putExtras(bundle);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        mContext.startActivity(intent);
-                    }
-                });
-                holder.textView2.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(mContext.getApplicationContext(),MakeupDetails.class);
-                        Bundle bundle = new Bundle();
-
-                        bundle.putString("category",category);
-                        bundle.putString("MakeupName",MakeupName);
-                        bundle.putString("MakeupBrand",brand);
-
-                        bundle.putString("MakeupContent",MakeupContent);
-                        bundle.putString("brandContent",brandContent);
-                        bundle.putInt("mark", mark);
-                        bundle.putInt("price", price);
-                        bundle.putInt("like", like);
-                        bundle.putString("location1", location1);
-                        bundle.putString("location2", location2);
-                        bundle.putString("location3",location3);
-                        bundle.putString("url1",image_url0);
-                        bundle.putString("url2",image_url1);
-                        bundle.putString("url3",image_url2);
-                        bundle.putString("img_content1",img_content1);
-                        bundle.putString("img_content2",img_content2);
-                        bundle.putString("img_content3",img_content3);
-
-                        intent.putExtras(bundle);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        mContext.startActivity(intent);
-                    }
-                });
+            }else {
+                holder = (ViewHolder)convertView.getTag();
             }
-            else if (flag == 2)
-            {
-                convertView= LayoutInflater.from(this.mContext).inflate(R.layout.item_collect_style, null, false);
+
+            holder.textView.setText("No." + String.valueOf(position + 1));
+            holder.textView1.setText(brand);
+            holder.textView2.setText(MakeupName);
+            holder.textView3.setText(String.valueOf(like));
+            holder.imageView1.setTag(R.drawable.good_icon);
+            ImageLoader.getInstance().displayImage(bean.getImages().get(0).getImage_url(), holder.imageView, mDisplayImageOptions);
+
+            holder.textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(c.getApplicationContext(), MakeupDetails.class);
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("category", category);
+                    bundle.putString("MakeupName", MakeupName);
+                    bundle.putString("MakeupBrand", brand);
+
+                    bundle.putString("MakeupContent", MakeupContent);
+                    bundle.putString("brandContent", brandContent);
+                    bundle.putInt("mark", mark);
+                    bundle.putInt("price", price);
+                    bundle.putInt("like", like);
+                    bundle.putString("location1", location.get(0));
+                    bundle.putString("location2", location.get(1));
+                    bundle.putString("location3", location.get(2));
+                    bundle.putString("url1", images.get(0).getImage_url());
+                    bundle.putString("url2", images.get(1).getImage_url());
+                    bundle.putString("url3", images.get(2).getImage_url());
+                    bundle.putString("img_content1", images.get(0).getImage_content());
+                    bundle.putString("img_content2", images.get(1).getImage_content());
+                    bundle.putString("img_content3", images.get(2).getImage_content());
+
+                    intent.putExtras(bundle);
+                    c.startActivity(intent);
+                }
+            });
+            holder.imageView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(c.getApplicationContext(),MakeupDetails.class);
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("category",category);
+                    bundle.putString("MakeupName",MakeupName);
+                    bundle.putString("MakeupBrand", brand);
+
+                    bundle.putString("MakeupContent", MakeupContent);
+                    bundle.putString("brandContent", brandContent);
+                    bundle.putInt("mark", mark);
+                    bundle.putInt("price", price);
+                    bundle.putInt("like", like);
+                    bundle.putString("location1", location.get(0));
+                    bundle.putString("location2", location.get(1));
+                    bundle.putString("location3", location.get(2));
+                    bundle.putString("url1", images.get(0).getImage_url());
+                    bundle.putString("url2", images.get(1).getImage_url());
+                    bundle.putString("url3", images.get(2).getImage_url());
+                    bundle.putString("img_content1", images.get(0).getImage_content());
+                    bundle.putString("img_content2", images.get(1).getImage_content());
+                    bundle.putString("img_content3", images.get(2).getImage_content());
+
+                    intent.putExtras(bundle);
+                    c.startActivity(intent);
+                }
+            });
+            holder.textView1.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(c.getApplicationContext(),MakeupDetails.class);
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("category",category);
+                    bundle.putString("MakeupName",MakeupName);
+                    bundle.putString("MakeupBrand",brand);
+
+                    bundle.putString("MakeupContent",MakeupContent);
+                    bundle.putString("brandContent", brandContent);
+                    bundle.putInt("mark", mark);
+                    bundle.putInt("price", price);
+                    bundle.putInt("like", like);
+                    bundle.putString("location1", location.get(0));
+                    bundle.putString("location2", location.get(1));
+                    bundle.putString("location3", location.get(2));
+                    bundle.putString("url1", images.get(0).getImage_url());
+                    bundle.putString("url2", images.get(1).getImage_url());
+                    bundle.putString("url3", images.get(2).getImage_url());
+                    bundle.putString("img_content1", images.get(0).getImage_content());
+                    bundle.putString("img_content2",images.get(1).getImage_content());
+                    bundle.putString("img_content3", images.get(2).getImage_content());
+
+                    intent.putExtras(bundle);
+                    c.startActivity(intent);
+                }
+            });
+            holder.textView2.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(c.getApplicationContext(),MakeupDetails.class);
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("category",category);
+                    bundle.putString("MakeupName",MakeupName);
+                    bundle.putString("MakeupBrand",brand);
+
+                    bundle.putString("MakeupContent",MakeupContent);
+                    bundle.putString("brandContent", brandContent);
+                    bundle.putInt("mark", mark);
+                    bundle.putInt("price", price);
+                    bundle.putInt("like", like);
+                    bundle.putString("location1", location.get(0));
+                    bundle.putString("location2", location.get(1));
+                    bundle.putString("location3", location.get(2));
+                    bundle.putString("url1", images.get(0).getImage_url());
+                    bundle.putString("url2", images.get(1).getImage_url());
+                    bundle.putString("url3", images.get(2).getImage_url());
+                    bundle.putString("img_content1", images.get(0).getImage_content());
+                    bundle.putString("img_content2",images.get(1).getImage_content());
+                    bundle.putString("img_content3", images.get(2).getImage_content());
+
+                    intent.putExtras(bundle);
+                    c.startActivity(intent);
+                }
+            });
+            return convertView;
+        }
+        else if(flag == 2){
+            if(convertView == null){
+                holder = new ViewHolder();
+                convertView = mInflater.inflate(R.layout.item_collect_style,null);
                 holder.textView=(TextView) convertView.findViewById(R.id.c_name);
                 holder.textView2=(TextView) convertView.findViewById(R.id.c_delete);
                 holder.imageView=(ImageView) convertView.findViewById(R.id.c_ItemImage);
                 convertView.setTag(holder);
-
-                //onclick
-                ListViewItem bean = mArrayList.get(position);
-
-                final String category = bean.getCategory();
-                final String MakeupName = bean.getName();
-                final String brand = bean.getBrand();
-                final String MakeupContent = bean.getMakeup_content();
-                final String brandContent = bean.getBrand_content();
-                final int mark = bean.getMark();
-                final int price = bean.getPrice();
-                final int like = Integer.valueOf(bean.getLike());
-                final String location1 = bean.getLocation1();
-                final String location2 = bean.getLocation2();
-                final String location3 = bean.getLocation3();
-                final String image_url0 = bean.getImageURL0();
-                final String image_url1 = bean.getImageURL1();
-                final String image_url2 = bean.getImageURL2();
-
-                final String img_content1 = bean.getImg_content1();
-                final String img_content2 = bean.getImg_content2();
-                final String img_content3 = bean.getImg_content3();
-
-                holder.textView2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        openOptionsDialog(MakeupName);
-                    }
-                });
-
-                holder.imageView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(mContext.getApplicationContext(), com.beautycare.makeup.MakeupDetails.class);
-                        Bundle bundle = new Bundle();
-
-                        bundle.putString("category", category);
-                        bundle.putString("MakeupName", MakeupName);
-                        bundle.putString("MakeupBrand", brand);
-
-                        bundle.putString("MakeupContent", MakeupContent);
-                        bundle.putString("brandContent", brandContent);
-                        bundle.putInt("mark", mark);
-                        bundle.putInt("price", price);
-                        bundle.putInt("like", like);
-                        bundle.putString("location1", location1);
-                        bundle.putString("location2", location2);
-                        bundle.putString("location3", location3);
-                        bundle.putString("url1", image_url0);
-                        bundle.putString("url2", image_url1);
-                        bundle.putString("url3", image_url2);
-                        bundle.putString("img_content1", img_content1);
-                        bundle.putString("img_content2", img_content2);
-                        bundle.putString("img_content3", img_content3);
-
-                        intent.putExtras(bundle);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        mContext.startActivity(intent);
-                    }
-                });
-
-
+            }else {
+                holder = (ViewHolder)convertView.getTag();
             }
-        } else {
-            holder=(ViewHolder) convertView.getTag();
+            holder.textView.setText(MakeupName);
+            ImageLoader.getInstance().displayImage(bean.getImages().get(0).getImage_url(), holder.imageView, mDisplayImageOptions);
+
+            holder.textView2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openOptionsDialog(MakeupName);
+                }
+            });
+            holder.imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(c.getApplicationContext(),MakeupDetails.class);
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("category",category);
+                    bundle.putString("MakeupName",MakeupName);
+                    bundle.putString("MakeupBrand",brand);
+
+                    bundle.putString("MakeupContent",MakeupContent);
+                    bundle.putString("brandContent", brandContent);
+                    bundle.putInt("mark", mark);
+                    bundle.putInt("price", price);
+                    bundle.putInt("like", like);
+                    bundle.putString("location1", location.get(0));
+                    bundle.putString("location2", location.get(1));
+                    bundle.putString("location3", location.get(2));
+                    bundle.putString("url1", images.get(0).getImage_url());
+                    bundle.putString("url2", images.get(1).getImage_url());
+                    bundle.putString("url3", images.get(2).getImage_url());
+                    bundle.putString("img_content1", images.get(0).getImage_content());
+                    bundle.putString("img_content2",images.get(1).getImage_content());
+                    bundle.putString("img_content3", images.get(2).getImage_content());
+
+                    intent.putExtras(bundle);
+                    c.startActivity(intent);
+                }
+            });
+            return convertView;
         }
-        if (this.mArrayList!=null) {
-            ListViewItem listViewItem=this.mArrayList.get(position);
-            if (holder.textView!=null) {
-                if(flag == 1) {
-                    holder.textView.setText(listViewItem.getNum());
-                    holder.textView1.setText(listViewItem.getBrand());
-                    holder.textView2.setText(listViewItem.getName());
-                    holder.textView3.setText(listViewItem.getLike());
-                    holder.imageView1.setTag(listViewItem.getIcon());
-                }
-                else if (flag ==2 ){
-                    holder.textView.setText(listViewItem.getName());
-                }
-            }
-            if (holder.imageView!=null) {
-                try {
-                    //加载图片
-                    mImageLoader.displayImage(
-                            listViewItem.getImageURL0(),
-                            holder.imageView,
-                            mDisplayImageOptions,
-                            mImageLoadingListenerImpl);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
 
-            }
-        }
         return convertView;
     }
 

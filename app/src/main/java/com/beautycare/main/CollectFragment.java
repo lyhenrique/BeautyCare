@@ -347,44 +347,7 @@ public class CollectFragment extends Fragment {
             initImageLoader(getActivity().getApplicationContext());
             mImageLoader = ImageLoader.getInstance();
 
-            ArrayList<ListViewItem> arrayList = new ArrayList<ListViewItem>();
-            String imagesUrl[] = ImagesUrl.Urls;
-            ListViewItem listViewItem = null;
-            // if flag = 1 SearchFragment flag = 2 CollectFragment
-            if(dataList.size()==0)
-            {
-                listViewItem = new ListViewItem("null" , "",
-                        "DIORSHOW",
-                        "null",
-                        "", "", 0, 0, "", "", ""
-                        , imagesUrl[1],
-                        "", "", "", "", "",
-                        R.drawable.good_icon, 2, "0");
-                arrayList.add(listViewItem);
-            }
-            else {
-                for (int i = 0; i < dataList.size(); i++) {
-                    listViewItem = new ListViewItem("No." + i,   dataList.get(i).getCategory(),
-                            dataList.get(i).getMakeup_name(),
-                            dataList.get(i).getBrand(),
-                            dataList.get(i).getMakeup_content(),
-                            dataList.get(i).getBrand_content(),
-                            dataList.get(i).getMark(),
-                            dataList.get(i).getPrice(),
-                            dataList.get(i).getLocation().get(0),
-                            dataList.get(i).getLocation().get(1),
-                            dataList.get(i).getLocation().get(2),
-                            dataList.get(i).getImages().get(0).getImage_url(),
-                            dataList.get(i).getImages().get(1).getImage_url(),
-                            dataList.get(i).getImages().get(2).getImage_url(),
-                            dataList.get(i).getImages().get(0).getImage_content(),
-                            dataList.get(i).getImages().get(1).getImage_content(),
-                            dataList.get(i).getImages().get(2).getImage_content(),
-                            R.drawable.good_icon, 2,String.valueOf(dataList.get(i).getLike()));
-                    arrayList.add(listViewItem);
-                }
-            }
-            ListViewAdapter adapter = new ListViewAdapter(arrayList, mContext, mImageLoader);
+            ListViewAdapter adapter = new ListViewAdapter(2,dataList, getActivity(), mImageLoader);
             mListView.setAdapter(adapter);
         }
 

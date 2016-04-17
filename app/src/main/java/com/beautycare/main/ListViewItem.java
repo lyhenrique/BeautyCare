@@ -2,36 +2,37 @@ package com.beautycare.main;
 
 /**
  * Created by owner on 2016/3/10.
+ * 目前沒有繼續使用該封裝類了
  */
 public class ListViewItem {
     // SearchFragment
     private String num;
     private String category;
-    private  String imageURL0;
-    private  String imageURL1;
-    private  String imageURL2;
     private String name;
+    String makeupContent;
     private String brand;
+    String brandContent;
     private  int icon;
     private  int flag;
-    private  String like;
-
-    String makeupContent;
-    String brandContent;
 
     int item_mark;
     int item_price;
+    private  String like;
 
     String location1;
     String location2;
     String location3;
 
+    String imageURL0;
+    String imageURL1;
+    String imageURL2;
     String img_content1;
     String img_content2;
     String img_content3;
 
-
-    // SearchFragment
+    public String getNum() {return num;    }
+    public String getCategory(){ return category; }
+     //SearchFragment
     public ListViewItem(String num, String category ,
                         String name,String brand,String makeupContent,
                         String brandContent,int item_mark,int item_price,
@@ -62,17 +63,13 @@ public class ListViewItem {
         this.icon = icon;
         this.flag = flag;
         this.like = like;
-
     }
-
     public int getFlag() {
         return flag;
     }
     public String getLike(){ return like; }
-    public String getCategory(){ return category; }
-    public String getNum() {
-        return num;
-    }
+
+
     public String getName(){ return name; }
 
     public String getMakeup_content(){ return makeupContent; }
@@ -153,8 +150,5 @@ public class ListViewItem {
     public void setImg_content3(String img_content3) {
         this.img_content3 = img_content3;
     }
-
-
-
 
 }

@@ -208,35 +208,11 @@ public class SearchFragment extends Fragment {
         protected void onPostExecute(ArrayList<MakeupData> dataList){
             mContext=getActivity();//获取Fragement Context
             mListView = (ListView) getView().findViewById(R.id.listAll);
-            initImageLoader(getActivity().getApplicationContext());
+            initImageLoader(getActivity());
+
             mImageLoader= ImageLoader.getInstance();
 
-            ArrayList<ListViewItem> arrayList = new ArrayList<ListViewItem>();
-            String imagesUrl[] = ImagesUrl.Urls;
-            ListViewItem listViewItem = null;
-            // if flag = 1 SearchFragment flag = 2 CollectFragment
-            for (int i = 0; i < dataList.size(); i++) {
-                listViewItem = new ListViewItem("No." + i,
-                        dataList.get(i).getCategory(),
-                        dataList.get(i).getMakeup_name(),
-                        dataList.get(i).getBrand(),
-                        dataList.get(i).getMakeup_content(),
-                        dataList.get(i).getBrand_content(),
-                        dataList.get(i).getMark(),
-                        dataList.get(i).getPrice(),
-                        dataList.get(i).getLocation().get(0),
-                        dataList.get(i).getLocation().get(1),
-                        dataList.get(i).getLocation().get(2),
-                        dataList.get(i).getImages().get(0).getImage_url(),
-                        dataList.get(i).getImages().get(1).getImage_url(),
-                        dataList.get(i).getImages().get(2).getImage_url(),
-                        dataList.get(i).getImages().get(0).getImage_content(),
-                        dataList.get(i).getImages().get(1).getImage_content(),
-                        dataList.get(i).getImages().get(2).getImage_content(),
-                        R.drawable.good_icon, 1, String.valueOf(dataList.get(i).getLike()));
-                arrayList.add(listViewItem);
-            }
-            ListViewAdapter adapter = new ListViewAdapter(arrayList,mContext,mImageLoader);
+            ListViewAdapter adapter = new ListViewAdapter(1,dataList,mContext,mImageLoader);
             mListView.setAdapter(adapter);
         }
 

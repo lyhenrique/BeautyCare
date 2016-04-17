@@ -18,7 +18,10 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:divider="@color/gray"
+        android:dividerHeight="2dp"
         android:id="@+id/listcollect"
-        android:divider="@color/gray"/>
+        android:layout_weight="1"
+        />
 
 </LinearLayout>
