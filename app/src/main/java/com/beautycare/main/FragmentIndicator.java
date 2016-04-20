@@ -78,7 +78,7 @@ public class FragmentIndicator extends LinearLayout implements OnClickListener {
         mIndicators = new View[4];
         mIndicators[0] = createIndicator(R.drawable.index_icon_2,
                 R.string.tab_home, COLOR_SELECT, TAG_ICON_0, TAG_TEXT_0);
-        mIndicators[0].setBackgroundResource(Color.alpha(0));
+        mIndicators[0].setBackgroundColor(Color.alpha(0));
         mIndicators[0].setTag(0);
         mIndicators[0].setOnClickListener(this);
         addView(mIndicators[0]);
@@ -135,7 +135,7 @@ public class FragmentIndicator extends LinearLayout implements OnClickListener {
         }
 
         // update current status.
-        mIndicators[which].setBackgroundResource(Color.alpha(0));
+        mIndicators[which].setBackgroundColor(Color.alpha(0));
         ImageView currIcon;
         TextView currText;
         switch(which) {
