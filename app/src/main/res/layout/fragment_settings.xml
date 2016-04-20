@@ -61,7 +61,7 @@
                 android:background="@drawable/button1"
                 android:textSize="20sp"
                 android:textAllCaps="false"
-                android:text="Recommend OpenBuy to Friends"
+                android:text="Recommend BeautyCare to Friends"
                 android:textColor="@color/colorAccent"
                 />
             <ImageView
